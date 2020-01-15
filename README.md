@@ -1,6 +1,6 @@
 相关问题 | 题意 | 解题思路 | 编程注意
 --- | --- |--- | --- |
-测试一 | 给定数字，返回它能代表字母集合(手机) |  特色人 | 注意 数字范围和空空字符串
+283.移动零 | |  使用双指针 | 注意 数字范围和空空字符串
 [93. 复原IP地址](https://leetcode-cn.com/problems/restore-ip-addresses/submissions/) | 给定一个包含数字的字符串，复原它并返回所有可能的IP地址格式 | 使用递归，一个记录当前，一个结果集合 | 注意 保证判断字符串否为空，‘0’情况，局部字符串大于'255'
 [131. 分割回文串](https://leetcode-cn.com/problems/palindrome-partitioning/submissions/) | 给定一个字符串，分割成子串，使每个子串都是回文串 | 递归，回溯，用index记录下标，pre记录前面
 [46. 全排列](https://leetcode-cn.com/problems/permutations/)  | 给没有重复数字的序列，返其所有可能的全排列 | 交换回溯，当前，后面数字 ；递归，回溯 选当前，记录之前 | 注意：交换回溯要 恢复原来状态
