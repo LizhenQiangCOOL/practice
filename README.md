@@ -1,7 +1,7 @@
 
 # 编程算法题（python解题）
 
-## Letcode
+## Leetcode
 
 ### 数组类题目
 
