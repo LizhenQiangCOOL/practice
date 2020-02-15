@@ -8,7 +8,7 @@
 |相关问题 | 题意 | 解题思路 | 编程注意
 |---|---|---|---|
 | [283. 移动零](https://leetcode-cn.com/problems/move-zeroes/) |　把数组的0移动到数组末尾，保持原来相对顺序　| 使用双指针，快指针往后搜索非零元素，慢指针站位等待交换 |　交换前可附加双指针是否相等判断
-| [75.　颜色分类](https://leetcode-cn.com/problems/sort-colors/) | 数组中有三种颜色，原地对它排序，使相同颜色相邻，并按红、白、蓝顺序，保持原来相对顺序 | 计数排序 遍历两边； 快速排序patition（只有三种元素简化版），三路快速排序（维护三个指针），遍历一遍 |
+| [75.　颜色分类](https://leetcode-cn.com/problems/sort-colors/) | 数组中有三种颜色，原地对它排序，使相同颜色相邻，并按红、白、蓝顺序，保持原来相对顺序 | 计数排序 遍历两边； 快速排序patition（只有三种元素简化版），三路快速排序（维护三个指针，一头一尾一遍历）　遍历一遍 |　注意计数排序要保持稳定，最后找位置应从后往前
 | [88.合并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array/) | 把有序数组num2（len=N），合并到有序数组num１(len=M+N, 前M为自身元素) |　归并排序merge，双指针，用更少的辅助空间可从后往前搜索（维护三指针）|　对题意因地适宜，从后往前三指针(最优)
 | [215. 数组中的第K个最大(最小)元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/)  |  在未排序数组中找到第k个最大元素  | 　可构建最大堆，弹出第k个最大（ 时间N*logk ）; 使用快速排序的patition, 第k最大则其主元右边有k-1数比它大（时间平均 N 最坏N**2）|  注意时间复杂度分析
 
@@ -108,33 +108,33 @@ Heapsort(A)
 | [350. 两个数组的交集二](https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/) | 给定两个数组，计算它们的交集 | 使用字典(映射)记录出现次数, 如果数组有序，可使用归并思想:双指针 |　注意题意要求输出所有（包括重复）   
 |　[454.四数相加二](https://leetcode-cn.com/problems/4sum-ii/) | 四个整数数组，有多有元组(它们的元素)累加为０ |  字典１记录AB数组累加，字典２记录CD数组的累加，再查找　|　注意结果累加是　字典１的值乘字典２的值
 |　[447. 回旋镖的数量](https://leetcode-cn.com/problems/number-of-boomerangs/) | 回旋镖指元组（i, j, k），其中i和j之间距离与i和k之间距离相等，　给多个点，找有多少组　| 字典记录距离，查找字典  |　注意组成元组个数应累加 x*(x-1)　距离相等点数目为ｘ
-| [215.数组中的第K个最大(最小)元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/) | 找数组第k个最大元素　| 除了构建堆和快速排序partition, 还能用字典存储然后减 |
+| [215.数组中的第K个最大(最小)元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/) | 找数组第k个最大元素　| 除了构建堆和快速排序partition, 还能用字典存储然后排序 |
 
 
 ### 链表类
 
--思路：穿针引线，是否需要设虚头指针，是否要覆盖赋值，是否能双指针（或快慢指针）,断开链表时注意，
+-思路：穿针引线，是否需要设虚头指针（头指针会发送改变都要设置），是否要覆盖赋值，是否能双指针（或快慢指针）,断开链表时注意，
 
 |相关问题 | 题意 | 解题思路 | 编程注意
 |--- | --- |--- | --- |
-| [206.反转链表](https://leetcode-cn.com/problems/reverse-linked-list/submissions/) | 将一个单向链表顺序反转，只遍历一遍　| 利用链表前插节　| 　可以构造虚头指针
-| [92. 反转链表二(注意点比较多)](https://leetcode-cn.com/problems/reverse-linked-list-ii/submissions/)  | 将一个单向链表的某一处(m到n)反转，只遍历一遍　|　构造虚头指针，要记录已倒叙列表的最后一个元素（即开始反转第一个元素）　| 注意：链表断开与链接，不能造成环死循环
+| [206.反转链表](https://leetcode-cn.com/problems/reverse-linked-list/submissions/) | 将一个单向链表顺序反转，只遍历一遍　| 链表表头前插入节　| 　可以构造虚头指针
+| [92. 反转链表二(注意点比较多)](https://leetcode-cn.com/problems/reverse-linked-list-ii/submissions/)  | 将一个单向链表的某一处(m到n)反转，只遍历一遍　|　复杂的链表某出插入加点：构造虚头指针，要记录已倒叙列表的最后一个元素（即开始反转第一个元素）　| 注意：链表断开与链接，不能造成环死循环
 | [83. 删除排序链表中的重复元素](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/) | 给定有序单项链表，把重复元素删除，只遍历一遍　| 判断当前与下一个是否相同，相同则链表删除下一个，不同则移动当前　| 注意：相同时不用移动当前
-| [86. 分割链表](https://leetcode-cn.com/problems/partition-list/) | 给单向链表和x值，使得链表前部分小于x,后部分大于等于x, 要保持相对顺序(稳定)，只遍历一遍 |　可维护两链表，最后合并：构造虚头节点，维护四个指针，遍历一遍　| 处理节点要断开，把节点的next = None
-| [328. 奇偶链表](https://leetcode-cn.com/problems/odd-even-linked-list/)  | 把单向链表，奇数位和偶数位分别排一起，最后相连，只遍历一遍　| 和上一题一样，维护两个链表(4个指针) | 　注意节点断开，把节点next=None, 循环的节点要后移
+| [86. 分割链表](https://leetcode-cn.com/problems/partition-list/) | 给单向链表和x值，使得链表前部分小于x,后部分大于等于x, 要保持相对顺序(稳定)，只遍历一遍 |　(类似归并merge)可维护两链表，最后合并：构造虚头节点，维护四个指针，遍历一遍　| 处理节点要断开，把节点的next = None
+| [328. 奇偶链表](https://leetcode-cn.com/problems/odd-even-linked-list/)  | 把单向链表，奇数位和偶数位分别排一起，最后相连，只遍历一遍　| (类似归并merge)和上一题一样，维护两个链表(4个指针) | 　注意节点断开，把节点next=None, 循环的节点要后移
 |　[2. 两树相加](https://leetcode-cn.com/problems/add-two-numbers/)  | 两个链表相加，以头为低位，满十进一，得出新链表　| 模拟加法，进位处理（有可能需要自己构造出链表） | 永远怀疑有进位，并处理
-|　445. 两数相加二                 |
-|203. 移除链表元素                |
-|82. 删除排序链表中的重复元素二      |
-|21. 合并两个有序链表              |
-|24. 两两交换链表中的节点           |
-|25. K 个一组翻转链表              |
-|147. 对链表进行插入排序            |
-|148. 排序链表                     | 归并排序
-|237. 删除链表中的节点               |
-|19. 删除链表的倒数第N个节点           |
-|61. 旋转链表                        |
-|143. 重排链表                       |
+|　[445. 两数相加二](https://leetcode-cn.com/problems/add-two-numbers-ii/) | 两个链表相加，以尾为低位，满十进一，得出新链表 | 主要解决进位如何加在前驱, （反转链表，或者用栈感觉不符合出题人思路）应该用递归(系统栈)　|　这两个问题可转化成１．两链表同样长度　２．循环或递归向加
+|　[203. 移除链表元素](https://leetcode-cn.com/problems/remove-linked-list-elements/)  |　单向链表中删除等于给定值val的所有节点　| 遍历删除，构造虚头指针可减少判断　|　注意循环节点移位
+|　[82. 删除排序链表中的重复元素二](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/) | 排序链表中删除所有重复的节点，只保留每出现过重复的节点　| 留一个标记说明当前重复节点也要删除，　构造虚头指针 | 注意判断的条件
+|　[21. 合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/) | 合并两个有序链表 | （类似归并merge), 构造虚头指针　|
+| [24. 两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs/) | 单向链表实际两两交换相邻节点　|　构造虚头指针，注意节点的断开与链接 |
+| [25. K 个一组翻转链表](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/) | 单向链表　每k个元素内倒序　|  构造虚头指针，要维护pre插入头指针、尾指针(连后面待处理元素)、当前循环指针　，这更复杂的链表倒序　| 注意点：链表断开与连接
+| [147. 对链表进行插入排序](https://leetcode-cn.com/problems/insertion-sort-list/) | 对单向链表进行插入排序　| 又要找前驱，只好递归或者使用栈, 构造虚拟头指针　|
+| [148. 排序链表](https://leetcode-cn.com/problems/sort-list/) | 对链表进行排序，要求时间复杂度O(n logn)和常数级空间复杂度　| 归并排序，　其中找中间点方法：普通遍历两边，计数；更好的方法是快慢指针　|　按照数组中的归并排序即可
+| [237. 删除链表中的节点](https://leetcode-cn.com/problems/delete-node-in-a-linked-list/) | 给定单向链表中某一节点，要求用O(1)时间删除节点　| 无法找到前驱节点，故假装删除，把值往前赋一下，删除该节点的下一个节点　|
+| [19. 删除链表的倒数第N个节点](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/submissions/)  | 单项链表中删除倒数第N个节点　| 使用快慢指针，一个先走N步　| 注意慢指针应该，走到删除节点前驱，为皆
+|　[61. 旋转链表](https://leetcode-cn.com/problems/rotate-list/) | 把单向链表一个元素从后拿到第一叫旋转一次　| 快慢指针，　确定旋转的部分，　特例：K>链表长度，还是要遍历一次知道链表长度，然后取余数　| 慢指针，应该是移除节点的前驱，快指针应该是最后一个元素
+|　[143. 重排链表](https://leetcode-cn.com/problems/reorder-list/)  | 按照顺序重新编排单向链表（合并链表、奇偶链表的变形）| 找中点，后半部分倒序，再奇偶合并 |
 
 
 
@@ -155,7 +155,6 @@ Heapsort(A)
 | [127. 单词接龙 ](https://leetcode-cn.com/problems/word-ladder/)  | 每次只能换一个字母，能不能从begin单词到end单词，能求最短转换序列   |构建图，然后层遍历
 | [347. 前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)|给一个数组，有数字，根据评率返回前k个 | 利用优先队列(堆)来实现 | 模块heapq 而heapq.heapify无key参数，heapq.nlargest有key参数
 | 23. 合并k个有序序列 | 将k个有序数组，归并成一个有序数组 | 时间复杂度最小，归并时应使用k大小的优先队列(堆)，每次拿出最小的只要log(k)时间复杂度 |  可以使用heapq.merge(*iterables(sort), key, reverse=False)
-
 
 
 
