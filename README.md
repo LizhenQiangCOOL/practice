@@ -100,7 +100,8 @@ Heapsort(A)
 ```
 
 
-### 查找表      
+### 查找表    
+  
 - 利用set、map(dict) 底层要求顺序，用二叉搜索树(平衡)，不要求，使用哈希表（散列表）实现
 
 |相关问题 | 题意 | 解题思路 | 编程注意
@@ -159,6 +160,7 @@ Heapsort(A)
 
 
 ### 二叉树和递归
+
 - 是递归(中序遍历)解决，还是 BFS 利用队列 或 DFS 利用栈
 - 如果题目要求是有路径，应考虑递归+回溯，用path记录数组
 
@@ -243,9 +245,10 @@ class Solution:
 ```
 
 ### 递归与回溯
+
 |相关问题 | 题意 | 解题思路 | 编程注意
 |--- | --- |--- | --- |
-| [17. 电话号码的字母组合](https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/submissions/) | 给定数字，返回它能代表字母集合(手机) | 这是一个树形结构，用递归 记录下标，一个当前路径，一个结果集合 | 注意 数字范围和空空字符串
+| [17. 电话号码的字母组合](https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/submissions/) |　给定数字，返回它能代表字母集合(手机) | 这是一个树形结构，用递归 记录下标，一个当前路径，一个结果集合 | 注意 数字范围和空空字符串
 | [93. 复原IP地址](https://leetcode-cn.com/problems/restore-ip-addresses/submissions/) | 给定一个包含数字的字符串，复原它并返回所有可能的IP地址格式 | 使用递归，一个记录当前，一个结果集合 | 注意 保证判断字符串否为空，‘0’情况，局部字符串大于'255'
 | [131. 分割回文串](https://leetcode-cn.com/problems/palindrome-partitioning/submissions/) | 给定一个字符串，分割成子串，使每个子串都是回文串 | 递归，回溯，用index记录下标，pre记录前面
 | [46. 全排列](https://leetcode-cn.com/problems/permutations/)  | 给没有重复数字的序列，返其所有可能的全排列 | 交换回溯，当前，后面数字 ；递归，回溯 选当前，记录之前 | 注意：交换回溯要 恢复原来状态
