@@ -12,7 +12,7 @@
 | [88.合并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array/) | 把有序数组num2（len=N），合并到有序数组num１(len=M+N, 前M为自身元素) |　归并排序merge，双指针，用更少的辅助空间可从后往前搜索（维护三指针）|　对题意因地适宜，从后往前三指针(最优)
 | [215. 数组中的第K个最大(最小)元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/)  |  在未排序数组中找到第k个最大元素  | 　可构建最大堆，弹出第k个最大（ 时间N*logk ）; 使用快速排序的patition, 第k最大则其主元右边有k-1数比它大（时间平均 N 最坏N**2）|  注意时间复杂度分析
 
-```
+```python
 # 计数排序：范围[0～K), A源数组 => B结果数组, 辅助数组C
 def counting_sort(A, B, k):
     C = [0] * k
@@ -43,7 +43,7 @@ def merge(A, p, q, r):
     n1 = q - p + 1
     n2 = r - (q+1) +1
     L = [0] * (n1 +1) #最后一位放哨兵
-    R = [0] * (n2 +1) 
+    R = [0] * (n2 +1)
     for i in range(n1):   #L = A[p:q+1]
         L[i] = A[p + (i-1)]
     for j in range(n2):   #R = A[q+1:r+1]
@@ -85,7 +85,7 @@ Max-Heapify(A,i)
         Max-Heapify(A,largest)  //递归调用
 
 //建最大堆
-Build-Max-Heap(A)    
+Build-Max-Heap(A)
     for i = 向下取整( A.length/2 ) downto 1  //为什么要从一半开始？保证它有子节点
         Max-Heapify(A,i)
 
@@ -99,18 +99,16 @@ Heapsort(A)
         Max-Heapify(A,1)
 ```
 
-
-### 查找表    
+### 查找表
 
 - 利用set、map(dict) 底层要求顺序，用二叉搜索树(平衡)，不要求，使用哈希表（散列表）实现
 
 |相关问题 | 题意 | 解题思路 | 编程注意
 |--- | --- |--- | --- |
-| [350. 两个数组的交集二](https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/) | 给定两个数组，计算它们的交集 | 使用字典(映射)记录出现次数, 如果数组有序，可使用归并思想:双指针 |　注意题意要求输出所有（包括重复）   
+| [350. 两个数组的交集二](https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/) | 给定两个数组，计算它们的交集 | 使用字典(映射)记录出现次数, 如果数组有序，可使用归并思想:双指针 |　注意题意要求输出所有（包括重复）
 |　[454.四数相加二](https://leetcode-cn.com/problems/4sum-ii/) | 四个整数数组，有多有元组(它们的元素)累加为０ |  字典１记录AB数组累加，字典２记录CD数组的累加，再查找　|　注意结果累加是　字典１的值乘字典２的值
 |　[447. 回旋镖的数量](https://leetcode-cn.com/problems/number-of-boomerangs/) | 回旋镖指元组（i, j, k），其中i和j之间距离与i和k之间距离相等，　给多个点，找有多少组　| 字典记录距离，查找字典  |　注意组成元组个数应累加 x*(x-1)　距离相等点数目为ｘ
 | [215.数组中的第K个最大(最小)元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/) | 找数组第k个最大元素　| 除了构建堆和快速排序partition, 还能用字典存储然后排序 |
-
 
 ### 链表类
 
@@ -137,23 +135,21 @@ Heapsort(A)
 |　[61. 旋转链表](https://leetcode-cn.com/problems/rotate-list/) | 把单向链表一个元素从后拿到第一叫旋转一次　| 快慢指针，　确定旋转的部分，　特例：K>链表长度，还是要遍历一次知道链表长度，然后取余数　| 慢指针，应该是移除节点的前驱，快指针应该是最后一个元素
 |　[143. 重排链表](https://leetcode-cn.com/problems/reorder-list/)  | 按照顺序重新编排单向链表（合并链表、奇偶链表的变形）| 找中点，后半部分倒序，再奇偶合并 |
 
-
-
 ### 栈和队列、优先乘
 
 |相关问题 | 题意 | 解题思路 | 编程注意
 |--- | --- |--- | --- |
 | [20. 有效的括号](https://leetcode-cn.com/problems/valid-parentheses/) |  括号是否匹配 | 利用栈，遇到右括号时就要出一个左口号 | 注意遍历完，栈减
 | [150. 逆波兰表达式求值](https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/)  | 构造逆波兰表达表达式 |利用栈，把计算值重新存在栈中，最后栈元素为结果 | 注意：两个树是否为负数时，如何整除
-| [71. 简化路径  ](https://leetcode-cn.com/problems/simplify-path/)   | 简化文件路径  |利用栈，等于..如有就弹，等于.就忽略，正常路径则加入 |
+| [71. 简化路径](https://leetcode-cn.com/problems/simplify-path/)   | 简化文件路径  |利用栈，等于..如有就弹，等于.就忽略，正常路径则加入 |
 树遍历，前中后序遍历 144 94 145     |   树的遍历 | 递归很简单，非递归：利用栈，前序则要把右边先压栈； 中序，不停先把根节点压入，在压根节点的左元素，后序就是前序的转换 | 注意，中序的非递归
-| [341. 扁平化嵌套列表迭代器 ](https://leetcode-cn.com/problems/flatten-nested-list-iterator/)  |  列表内嵌列表->一个列表       | 使用队列存储，如果是列表则递归调用存储函数|
-| [102. 二叉树的层次遍历 ](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)  |    利用队列，注意输出结构
+| [341. 扁平化嵌套列表迭代器](https://leetcode-cn.com/problems/flatten-nested-list-iterator/)  |  列表内嵌列表->一个列表       | 使用队列存储，如果是列表则递归调用存储函数|
+| [102. 二叉树的层次遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)  |    利用队列，注意输出结构
 | [107. 二叉树的层次遍历二](https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/)  |
 | [103. 二叉树的锯齿形层次遍历](https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/)  |
 | [199. 二叉树的右视图](https://leetcode-cn.com/problems/binary-tree-right-side-view/)  |  找每一层的最后一个元素 | 层次遍历
-| [279. 完全平方数  ](https://leetcode-cn.com/problems/perfect-squares/)          |  用最少的完全平方数构造一个函数 |要构建图，层遍历，BFS广度优先搜索; 可背包
-| [127. 单词接龙 ](https://leetcode-cn.com/problems/word-ladder/)  | 每次只能换一个字母，能不能从begin单词到end单词，能求最短转换序列   |构建图，然后层遍历
+| [279. 完全平方数](https://leetcode-cn.com/problems/perfect-squares/)          |  用最少的完全平方数构造一个函数 |要构建图，层遍历，BFS广度优先搜索; 可背包
+| [127. 单词接龙](https://leetcode-cn.com/problems/word-ladder/)  | 每次只能换一个字母，能不能从begin单词到end单词，能求最短转换序列   |构建图，然后层遍历
 | [347. 前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)|给一个数组，有数字，根据评率返回前k个 | 利用优先队列(堆)来实现 | 模块heapq 而heapq.heapify无key参数，heapq.nlargest有key参数
 | 23. 合并k个有序序列 | 将k个有序数组，归并成一个有序数组 | 时间复杂度最小，归并时应使用k大小的优先队列(堆)，每次拿出最小的只要log(k)时间复杂度 |  可以使用heapq.merge(*iterables(sort), key, reverse=False)
 
@@ -165,7 +161,7 @@ Heapsort(A)
 |相关问题 | 题意 | 解题思路 | 编程注意
 |--- | --- |--- | --- |
 | [111. 二叉树的最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/) |二叉树的最小深度，深度指根到叶子节点 |递归：用前序遍历，到叶子节点就把深度记录；层序遍历：遍历每一层，遇到None，返回该层 | 注意递归终止条件是叶子节点
-| [226. 翻转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/) | 翻转一棵二叉树。即输入一棵树，输出这个树的镜像 |递归：使用前序遍历进行左右子树交换 | 
+| [226. 翻转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/) | 翻转一棵二叉树。即输入一棵树，输出这个树的镜像 |递归：使用前序遍历进行左右子树交换 |
 | [100. 相同的树](https://leetcode-cn.com/problems/same-tree/submissions/) | 递归：前序遍历判断是否相同 |注意终止条件，都为空返回True
 | [101. 对称二叉树](https://leetcode-cn.com/problems/symmetric-tree/submissions/)| 判断一棵树是否对称，即是否镜像 | 递归：前序遍历，左子树与右子树判断  | 注意终止条件
 | [222. 完全二叉树的节点个数](https://leetcode-cn.com/problems/count-complete-tree-nodes/submissions/) | 求一个完全二叉树的节点个数 | 递归：前序遍历，累计个数|
@@ -185,7 +181,7 @@ Heapsort(A)
 
 - 删除二叉搜索树中节点，并且无父亲节点
 
-```
+```python
 
 class TreeNode:
     def __init__(self, x):
@@ -207,7 +203,7 @@ class Solution:
         if key > root.val:
             root.right = self.deleteNode(root.right, key)
             return root
-        
+
         # 下面就是 該root要刪除
         if root.left is None:
             new_root = root.right
@@ -251,8 +247,8 @@ class Solution:
 | [131. 分割回文串](https://leetcode-cn.com/problems/palindrome-partitioning/submissions/) | 给定一个字符串，分割成子串，使每个子串都是回文串 | 递归，回溯，用index记录下标，pre记录前面
 | [46. 全排列](https://leetcode-cn.com/problems/permutations/)  | 给没有重复数字的序列，返其所有可能的全排列 | 交换回溯，当前，后面数字 ；递归，回溯 选当前，记录之前 | 注意：交换回溯要 恢复原来状态
 
-
 ### 动态规划类
+
 - 先思考递归，求递归推导式，优化成动态规划从低往上。主要考虑 第i项怎么依赖0到i-1项
 - 状态机：如何维护这个状态多维数组,如dp[i][k][j]
 - 0-1背包：F(n, C)表示n个物品放进容量为C的背包，使得价值最大，`F(i, C) = max( F(i-1, C), v(i)+F(i-1, c-w(i) )` 放与不放
@@ -271,9 +267,9 @@ class Solution:
 | [91. 解码方法](https://leetcode-cn.com/problems/decode-ways/)       |给一字符串数字 解码成字母（A-Z),有多少种       | `dp[i] = dp[i-1](能单独成为字母) + dp[i-2](能和前一个组成字母)` | 注意：给的字符串以0开头是没结果的
 | [198. 打家劫舍](https://leetcode-cn.com/problems/house-robber/submissions/)|一数组，选不相邻元素，最大和            | `dp[i] = max(dp[i-2]+nums[i], dp[i-1])`，是否偷第i个，dp[n]为结果|  
 | [213. 打家劫舍II](https://leetcode-cn.com/problems/house-robber-ii/submissions/)|一组数成环，选不相邻元素，最大和    | 和打家劫舍一样                                    | 拿第一个不能拿最后一个，拿最后一个不能拿第一个，把它们分别去掉变成打家劫舍  
-| [337 打家劫舍三](https://leetcode-cn.com/problems/house-robber-iii/) | 树形结构，拿父节点，不能拿其直属的孩子节点    | 树形递归解决dp[0,1],dp[0]表示不选父，dp[1]表示选父|可递归动态规划，也可BFS广度搜索，变成数组回归 大家劫舍   
+| [337 打家劫舍三](https://leetcode-cn.com/problems/house-robber-iii/) | 树形结构，拿父节点，不能拿其直属的孩子节点    | 树形递归解决dp[0,1],dp[0]表示不选父，dp[1]表示选父|可递归动态规划，也可BFS广度搜索，变成数组回归 大家劫舍
 | [309. 最佳买卖股票时机含冷冻期](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)| 卖出股票就可以买，可买多次，最大收益| 状态机：dp[i][k][0]第i天，总买卖k次不持有股票 dp[i][k][1]第i天，总买买k次持有股票 |利用这个状态机可以解决一些列股票买卖问题
-| [121. 买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/solution/)| [122. 买卖股票的最佳时机II](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/)|[123. 买卖股票的最佳时机III ](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/)|[188. 买卖股票的最佳时机 IV](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/)
+| [121. 买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/solution/)| [122. 买卖股票的最佳时机II](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/)|[123. 买卖股票的最佳时机III](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/)|[188. 买卖股票的最佳时机 IV](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/)
 | [300. 最长上升子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/) | LIS,数组，求上升子序列，不一定连续 |  `f(n) = max(1, f(i)+1) i<n, 且num[i]<num[n]`  | 初始化所有元素长度为1，以自己结尾, 最优是dp 二分查找一个元素位置，若该元素
 | [376. 摆动系列](https://leetcode-cn.com/problems/wiggle-subsequence/submissions/) | 数组，求最长摆动系列  | 维护两个dp，一个序列处于上升，一个序列处于下降。 `f(n) = max(1, f(i)+1) i<n` | 注意down和up区别
 | LCS 最长公共子序列   |    LCS | LCS(i,j) = 当a[i]=b[j], 1+LCS(i+1,j+1) 当a[i]!=b[j], max(LCS(i,j+1), LCS(i+1,j)) | 明白子串要求连续，而子序列不要求连续
@@ -320,7 +316,7 @@ def duplicate(arr):
 def getDuplication(arr):
     if not isinstance(arr, list) or len(arr)==0:
         return -1
-        
+
     start = 1
     end =len(arr) + 1
     while end>=start:
@@ -540,7 +536,7 @@ class Solution:
             while TNode.left:
                 TNode = TNode.left
             return TNode
-        
+
         if TNode.right:
             return final_left(TNode.right)
         else:
@@ -561,10 +557,10 @@ class Solution:
     def __init__(self):
         self.stack1 = []
         self.stack2 = []
-       
+
     def push(self, node):
         self.stack1.append(node)
-        
+
     def pop(self):
         if self.stack2 == []:
             while self.stack1:
@@ -622,7 +618,7 @@ def jumpFloor(number:int)->int:
 
 def jumpFloorII(number:int)->int:
         if number<1:
-            return 0 
+            return 0
         else:
             return pow(2,number-1)
 ```
@@ -671,11 +667,11 @@ class Solution:
         return rotateArray[middle]
 ```
 
-### ==面试12==：矩阵中的路径
+### ==面试题12==：矩阵中的路径
 
 题目：请设计一个函数，用来判断在一个矩阵中是否存在一条包括某字符串所有字符的路径。路径可以从矩阵中的任意一格开始，每一步可以在矩阵中向左、右、上、下移动一格。如果一条路径经过了矩阵的某一格，那么该路径不能再次进入该格子。例如，在下面的3x4的矩阵中包含一条字符串“bfce”的路径。但矩阵中不包含字符串“abfb”的路径，因为字符串的第一个字符b占据了矩阵中的第一行第二格子之后，路径不能再次进入这个格子。
 
-a | b | t | g 
+a | b | t | g
 ---|---
 c | f | c | s
 j | d | e | h
@@ -698,7 +694,7 @@ class Solution:
     def hasPathCore(self, matrix,rows,cols, i,j ,path,pathLength,visited):
         if pathLength == len(path):
             return True
-        
+
         hasPathFlag = False
         if i>=0 and i<rows and j>=0 and j<cols and matrix[i*cols+j] == path[pathLength] and not visited[i*cols+j]:
             pathLength+=1
@@ -760,7 +756,7 @@ def maxProductAfterCutting_solution(length):
         return 1
     if length==3:
         return 2
-    
+
     products = [0]*(length+1)
     products[1]=1
     products[2]=2
@@ -783,7 +779,7 @@ def maxProductAfterCutting_solution(length):
         return 1
     if length==3:
         return 2
-    
+
     timesOf3 = length//3
     if length - timesOf3*3 == 1:
         timesOf3 -= 1
@@ -797,9 +793,9 @@ def maxProductAfterCutting_solution(length):
 
 - 二进制位运算
 
-与(&)| 或( \| ) | 异或(^) 
+与(&)| 或( \| ) | 异或(^)
 ---|---|---
-都为一，才为一 | 有一，则一 | 不同，则一 
+都为一，才为一 | 有一，则一 | 不同，则一
 
 - ==左移==运算符m<<n：把m左移n位，最左边n位将被抛弃，同时最右边补n个0 （比如一个规定8位的数字）
 - ==右移==运算符m>>n, 要注意若数字原先为正数，则右移后最左边补n个0，若数字原先为负数，则右移后最左边补n个1  （负数，最左符号位为一）
@@ -810,13 +806,13 @@ def maxProductAfterCutting_solution(length):
 class Solution:
     def NumberOf1(self, n):
         count = 0
-        flag =1 
+        flag =1
         for i in range(0,32):
             if n&flag:
                 count+=1
             flag=flag<<1
         return count
-        
+
 #  减一再和之前的数做位与 ，有多少个一循环多少次
 # python负数并不是补码，题目要求负数用补码表示， bin(-1 )=>'-0b1'
 # 补码： 负数 & 0xffffffff  
@@ -839,8 +835,8 @@ class Solution:
 题目：实现函数double Power(double base, int exponent), 求base的exponent次方。不得使用库函数，同时不需要考虑大数问题
 
 - 解法：
-- a^n = a^(n/2) * a^(n/2)   n为偶数
-- a^n = a^(n-1 /2) * a^(n-1 /2) * a     n为奇数
+- a^n = a^(n/2) \* a^(n/2)   n为偶数
+- a^n = a^(n-1 /2)　\*　a^(n-1 /2)* a     n为奇数
 
 ```python
 # -*- coding:utf-8 -*-
@@ -855,7 +851,7 @@ class Solution:
         if exponent<0:          # return 1/result if exponent < 0 else result
             result = 1/result
         return result
-        
+
     #效率不高
     def PowerWithUnsignedExponent(self,base, exponent):
         result = 1
@@ -901,7 +897,7 @@ def Print1ToMax(n:int)->None:
 
 **题目一：**在O(1)时间内删除链表节点。给定单向链表的头指针和一个节点指针，定义一个函数在O(1)时间内删除该节点。
 
-- 常规方法：遍历找出，然后删除 
+- 常规方法：遍历找出，然后删除
 - 时间0(1)方法：删除节点在中间有后续节点，只要要后续节点值复制过来，把后续节点删，就相当于删除了想要删除的节点。另外还有两种情况：1、链表只有一节点，删除头节点（也是尾节点）2、删除节点为最后一节点，则还是需要遍历一遍.  *（这都建立在该删除节点一定在链表中）*
 
 ```python
@@ -986,14 +982,14 @@ class Solution:
             return True
         if len(s)!=0 and len(pattern)==0:
             return False
-        
+
         #正则表达式长度大于1，且第二个字符为*
         if len(pattern)>1 and pattern[1] == '*':
             if len(s)!=0 and (pattern[0] == s[0] or pattern[0]=="."):
                 return self.matchCore(s[1:],pattern[2:]) or self.matchCore(s[1:],pattern[:]) or self.matchCore(s[:],pattern[2:])
             else:
                 return self.matchCore(s[:],pattern[2:])
-        
+
         #字符串和正则表达式都不为空
         if len(s)!=0 and (s[0] == pattern[0] or pattern[0]=="." ):
             return self.matchCore(s[1:],pattern[1:])
@@ -1013,7 +1009,7 @@ class Solution:
             return False
         s = list(s)
         flag_number = self.scanInterger(s)
-        
+
         if len(s)!=0 and s[0]=='.':
             s.pop(0)
             flag_number = self.scanUnsignedInterger(s) or flag_number
@@ -1021,7 +1017,7 @@ class Solution:
             s.pop(0)
             flag_number = flag_number and self.scanInterger(s)
         return flag_number and len(s)==0
-    
+
     def scanInterger(self,s):
         if len(s)==0:
             return False
@@ -1048,14 +1044,14 @@ class Solution:
 class Solution:
     def reOrderArray(self, array):
         return sorted(array,key=lambda c:c & 0x1,reverse=True)
-                
+
 # -*- coding:utf-8 -*-
 class Solution:
     def reOrderArray(self, array):
         if len(array)==0:
             return []
         L,index= self.reOrder(array,lambda x:x & 0x1)  #是否为奇数
-        #竟然 牛客还要求排序made 
+        #竟然 牛客还要求排序made
         Lleft = L[:index]
         Lright =L[index:]
         return sorted(Lleft)+sorted(Lright)
@@ -1072,7 +1068,7 @@ class Solution:
         return array,begin_index
 ```
 
-### ==面试22==:链表中倒数第k个结点
+### ==面试题22==:链表中倒数第k个结点
 
 题目：输入一个链表，输出该链表中倒数第k个节点。为了符合大多数人的习惯，本题从1开始计数，即链表的尾结点是倒数第1个节点。例如，一个链表有6个节点，从头节点开始，它们的值依次是1、2、3、4、5、6.这个链表的倒数第3个节点是值为4的节点。
 
@@ -1102,7 +1098,7 @@ class Solution:
         return pBchild
 ```
 
-### ==面试23==：链表中环的入口结点
+### ==面试题23==：链表中环的入口结点
 
 题目：如果一个链表中包含环，如何找出环的入口节点？例如，在如图3.8所示的链表中，环的入口节点是节点3
 
@@ -1150,7 +1146,8 @@ class Solution:
 ### ==面试题24==：反转链表
 
 题目：定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。
-```
+
+```python
 # -*- coding:utf-8 -*-
 # class ListNode:
 #     def __init__(self, x):
@@ -1230,7 +1227,7 @@ class Solution:
             if not result:
                 result = self.HasSubtree(pRoot1.right,pRoot2)
         return result
-    
+
     def DoesTree1HaveTree2(self,pRoot1,pRoot2):
         if pRoot2 == None:
             return True
@@ -1239,7 +1236,7 @@ class Solution:
         if not self.Equal(pRoot1.val,pRoot2.val):
             return False
         return self.DoesTree1HaveTree2(pRoot1.left,pRoot2.left) and self.DoesTree1HaveTree2(pRoot1.right,pRoot2.right)
-    
+
     def  Equal(self,num1,num2):
         if num1-num2>-0.0000001 and num1-num2<0.0000001:
             return True
@@ -1270,7 +1267,7 @@ class Solution:
             self.Mirror(root.left)
         if root.right:
             self.Mirror(root.right)
-        return root                                      
+        return root
 ```
 
 ### ==面试题28==：对称的二叉树
@@ -1307,7 +1304,7 @@ class Solution:
     # matrix类型为二维列表，需要返回列表
     def printMatrix(self, matrix):
         if len(matrix)==0:
-            return 
+            return
         start = 0
         row = len(matrix)
         col = len(matrix[0])
@@ -1348,7 +1345,7 @@ class Solution:
     def __init__(self):
         self.stack = []
         self.min_stack = [] #辅助
-        
+
     def push(self, node):
         self.stack.append(node)
         if self.min_stack == [] or node<=self.min_stack[-1]:
@@ -1492,7 +1489,7 @@ class Solution:
         while levels[0] or levels[1]:
             pNode = levels[current].pop()
             print(pNode.val,end=" ")
-            
+
             if current == 0:
                 if pNode.left:
                     levels[next].append(pNode.left)
@@ -1523,7 +1520,7 @@ class Solution:
         if sequence==None or len(sequence)==0:
             return False
         root = sequence[-1]
-        
+
         flag_index = len(sequence)-1
         for i in range(0,len(sequence)-1):
             if sequence[i]>root:
@@ -1566,7 +1563,7 @@ class Solution:
         self.FindRightPath(root,expectNumber,path,currentSum,result)
         result.sort(key = lambda x:len(x),reverse = True)
         return result
-        
+
     def FindRightPath(self,root,expectNumber,path,currentSum,result):
         currentSum += root.val
         path.append(root.val)
@@ -1600,8 +1597,7 @@ class Solution:
         self.CloneNodes(pHead)
         self.ConnectSiblingNodes(pHead)
         return self.ReconnectNodes(pHead)
-        
-    
+
     def CloneNodes(self, pHead):
         pNode = pHead
         while pNode:
@@ -1610,7 +1606,7 @@ class Solution:
             pCloned.random = None
             pNode.next = pCloned
             pNode = pCloned.next
-    
+
     def ConnectSiblingNodes(self,pHead):
         pNode = pHead
         while pNode:
@@ -1618,7 +1614,7 @@ class Solution:
             if pNode.random :
                 pCloned.random = pNode.random.next
             pNode = pCloned.next
-    
+
     def ReconnectNodes(self,pHead):
         pNode = pHead
         pClonedHead = None
@@ -1649,13 +1645,13 @@ class Solution:
         self.pLastNodeInList = None
     def Convert(self, pRootOfTree):
         if pRootOfTree==None:
-            return 
+            return
         self.ConvertNode(pRootOfTree)
         pHeadOfList = pRootOfTree
         while pHeadOfList and pHeadOfList.left :
             pHeadOfList = pHeadOfList.left
         return pHeadOfList
-    
+
     def ConvertNode(self,pNode):
         if pNode == None:
             return
@@ -1691,18 +1687,18 @@ class Solution:
     def Deserialize(self, s):
         # write code here
         self.flag += 1
-         
+
         l = s.split(',')
         if self.flag >= len(s):
             return None
-        
+
         root = None
         if l[self.flag] != '#':
             root = TreeNode(int(l[self.flag]))
             root.left = self.Deserialize(s)
             root.right = self.Deserialize(s)
         return root
-        
+
 #利用pop()
 class Solution:
     def Serialize(self, root):
@@ -1738,8 +1734,8 @@ class Solution:
         if not ss:
             return []
         return sorted(list(set(map(''.join, itertools.permutations(ss)))))
-        
-    
+
+
 # -*- coding:utf-8 -*-
 class Solution:
     def __init__(self):
@@ -1788,13 +1784,13 @@ class Solution:
         if not self.CheckMoreThanHalf(numbers,result):
             result = 0
         return result
-        
+
     def CheckMoreThanHalf(self,numbers,result):
         if numbers.count(result)*2<= len(numbers):
             return False
         else:
             return True
-        
+
     def Partition(self,A,p,r):
         x = A[r]
         i = p-1
@@ -1808,7 +1804,7 @@ class Solution:
         i = random.randint(p,r)
         A[r],A[i] = A[i],A[r]
         return self.Partition(A,p,r)
-        
+
 
 # -*- coding:utf-8 -*-
 class Solution:
@@ -1828,12 +1824,12 @@ class Solution:
         if not self.CheckMoreThanHalf(numbers,result):
             result = 0
         return result
-        
+
     def CheckMoreThanHalf(self,numbers,result):
         if numbers.count(result)*2<= len(numbers):
             return False
         else:
-            return True   
+            return True
 ```
 
 ### ==面试题40==：最小的k个数
@@ -1858,7 +1854,7 @@ class Solution:
     def GetLeastNumbers_Solution(self, tinput, k):
         if len(tinput)==0 or len(tinput)<k or k<=0:
             return []
-        
+
         start = 0
         end = len(tinput)-1
         index = self.Randomize_Partition(tinput,start,end)
@@ -1893,7 +1889,6 @@ class Solution:
                                二：可能在这容器中删除
 ```
 
-
 ### ==面试题41==：数据流中的中位数
 
 ```python
@@ -1904,12 +1899,11 @@ class Solution:
     def Insert(self, num):
         self.data.append(num)
         self.data.sort()
-        
+
     def GetMedian(self,data):
         length=len(self.data)
         return self.data[length//2] if length & 0x1 else (self.data[length//2]+self.data[length//2-1])/2.0
 ```
-
 
 ### ==面试题42==：连续子数组的最大和
 
@@ -1920,14 +1914,14 @@ class Solution:
     def FindGreatestSumOfSubArray(self, array):
         if type(array) != list or len(array)==0:
             return None
-        
+
         nCurSum = 0
         nGreatestSum = 0
         maxitem = array[0]
         for item in array:
             if item>maxitem:
                 maxitem=item
-                
+
             if nCurSum<=0:
                 nCurSum = item
             else:
@@ -1955,7 +1949,7 @@ class Solution:
                 number+=1
             n = n //10
         return number
-        # write code here 
+        # write code here
 
 
 # 更好方法 时间复杂度 o(lgn)
@@ -1965,19 +1959,19 @@ class Solution:
         if n < 0:
             return 0
         return self.NumberOf1(str(n))
-    
+
     def NumberOf1(self,strN):
         if strN == None or len(strN) == 0:
             return 0
-        
+
         first = int(strN[0])
         length = len(strN)
-        
+
         if length == 1 and first ==0:
             return 0
         if length == 1 and first ==1:
             return 1
-        
+
         #假设strN 是"21345"
         #numFirstDifit 是 数字10000 ~ 19999 的第一位（万位）出现1的数目
         numFirstDigit = 0
@@ -1985,12 +1979,12 @@ class Solution:
             numFirstDigit = pow(10,length-1)
         elif first == 1:
             numFirstDigit = int(strN[1:])+1
-        
+
         #numOtherDigits 是 1346 ~ 21345 除了第一位，其他位出现1的数目 （第一位可以分first段，每段中剩下位 选一位为1，其他位可以为0~9中任意一个）
         numOtherDigits = first * (length-1) * pow(10,length-2)
         #numRecursive 是 1~1345 出现 1的数目，递归
         numRecursive = self.NumberOf1(strN[1:])
-        
+
         return numFirstDigit + numOtherDigits + numRecursive
 ```
 
@@ -2009,20 +2003,20 @@ class Solution:
             index -= (digits * numbers)
             digits+=1
         return -1
-    
+
     def countOfIntergers(self,digits):
         if digits == 1:
             return 10
         count = pow(10,digits-1)
         return 9 * count
-    
+
     def digitAtTheIndex(self,digits):
         number = self.beginNumber(digits) + index/digits
         intdexFromRight = digits - index%digits
         for i in range(1,intdexFromRight):
             number /= 10
         return number % 10
-    
+
     def beginNumber(digits):
         if digits == 1:
             return 0
@@ -2052,7 +2046,6 @@ class Solution:
         return "".join([str(i) for i in example])
 ```
 
-
 ### ==面试题46==：把数字翻译成字符串
 
 f(i) = f(i+1)+g(i,i+1)*f(i+2) 注：f(i)表示从第i位数字开始的不同翻译的数目
@@ -2063,7 +2056,7 @@ class Solution:
         if number<0:
             return 0
         return self.subGetTranslationCount(str(number))
-    
+
     def subGetTranslationCount(self,str_number):
         length = len(str_number)
         counts = [0]*length
@@ -2138,12 +2131,12 @@ class Solution:
     def longest_substring_without_deplication(self, ss):
         if not isinstance(ss, str) or len(ss) == 0:
             return 0
-        
+
         count = [0] * 26
         left = 0
         right = -1
         res = 0
-        
+
         while left<len(ss):
             if right+1 <len(ss) and  count[ord(ss[right+1]) - ord('a')] == 0:
                 right += 1
@@ -2151,7 +2144,7 @@ class Solution:
             else:
                 count[ord(ss[left]) - ord('a')] -= 1
                 left += 1
-        
+
             res = max(res, right-left+1)
         return res
 ```
@@ -2166,11 +2159,11 @@ class Solution:
             return 0
         UglyNumbers = [1]
         nextUglyIndex = 1
-        
+
         Multiply2 = 0
         Multiply3 = 0
         Multiply5 = 0
-        
+
         while nextUglyIndex < index:
             minNumber = min(UglyNumbers[Multiply2]*2,UglyNumbers[Multiply3]*3,UglyNumbers[Multiply5]*5)
             UglyNumbers.append(minNumber)
@@ -2181,9 +2174,9 @@ class Solution:
                 Multiply3 += 1
             while UglyNumbers[Multiply5]*5 <= UglyNumbers[nextUglyIndex]:
                 Multiply5 += 1
-            
+
             nextUglyIndex +=1
-        
+
         return UglyNumbers[nextUglyIndex-1]
 
 
@@ -2226,13 +2219,13 @@ class Solution:
     def __init__(self):
         self.occurrence = {}
         self.index = 0
-    
+
     def insert(self,char):
         if char in self.occurrence.keys():
             self.occurrence[char] = -1
         else:
             self.occurrence[char] = self.index
-        
+
         self.index += 1
     def firstAppearing(self):
         result = ''
@@ -2255,21 +2248,21 @@ class Solution:
             return 0
         datacopy = copy.copy(data)
         return self.InversePairsCore(data,datacopy, 0, len(data)-1)
-    
+
     def InversePairsCore(self, data, datacopy, start, end):
         if start == end:
             datacopy[start] = data[start]
             return 0
         length = (end - start) >> 1
-        
+
         left = self.InversePairsCore(datacopy, data, start, start + length)
         right = self.InversePairsCore(datacopy, data, start + length + 1, end)
-        
+
         i = start + length
         j = end
         indexCopy = end
         count = 0
-        
+
         while i >= start and j >= start + length + 1:
             if data[i] > data[j]:
                 datacopy[indexCopy] = data[i]
@@ -2288,7 +2281,7 @@ class Solution:
             datacopy[indexCopy] = data[j]
             indexCopy -= 1
             j -= 1
-        return left + right + count 
+        return left + right + count
 ```
 
 ### ==面试题52==：两个链表的第一个公共节点
@@ -2312,15 +2305,15 @@ class Solution:
             pListHeadLong = pHead2
             pListHeadShort = pHead1
             nLengthDif = nLength2 - nLength1
-        
+
         for i in range(nLengthDif):
             pListHeadLong = pListHeadLong.next
-        
+
         while pListHeadLong and pListHeadShort and pListHeadLong != pListHeadShort:
             pListHeadLong = pListHeadLong.next
             pListHeadShort = pListHeadShort.next
         return pListHeadLong
-            
+
     def GetListLength(self,pHead):
         nLength = 0
         pNode = pHead
@@ -2349,7 +2342,7 @@ class Solution:
             else:
                 result = last - first + 1
         return result
-    
+
     def getdown(self, arr, left, right, k, cmp):  # 找下界
         while(left < right):
             mid = (left + right) >> 1
@@ -2377,7 +2370,7 @@ class Solution:
     def GetMissingNumber(self, data):
         if not isinstance(data,list) or len(data) == 0:
             return -1
-        
+
         left = 0
         right = len(data) - 1
         while left <= right:
@@ -2390,7 +2383,7 @@ class Solution:
                 left = middle + 1
         if left == len(data):
             return  left
-        
+
         return -1
 
 ```
@@ -2435,7 +2428,7 @@ class Solution:
             return None
         self.k = k
         return self.KthNodeCore(pRoot)
-    
+
     def KthNodeCore(self, pRoot):
         target = None
         if pRoot.left:
@@ -2466,11 +2459,12 @@ class Solution:
             return 0
         nLeft = self.TreeDepth(pRoot.left)
         nRight = self.TreeDepth(pRoot.right)
-        
+
         return nLeft + 1 if nLeft > nRight else nRight + 1
 ```
 
 题目二：平衡二叉树
+
 ```python
 # -*- coding:utf-8 -*-
 # class TreeNode:
@@ -2483,7 +2477,7 @@ class Solution:
         if pRoot == None:
             pDepth = 0
             return True,pDepth
-        
+
         flag1, left = self.IsBalanced(pRoot.left)
         flag2, right = self.IsBalanced(pRoot.right)
 
@@ -2492,10 +2486,10 @@ class Solution:
             if diff <= 1 and diff >= -1:
                 pDepth = 1 +  (left if left >right else right)
                 return True, pDepth
-        
+
         return False,0
-        
-        
+
+
 # 牛客网False并不能返回两个值
 # -*- coding:utf-8 -*-
 # class TreeNode:
@@ -2533,20 +2527,20 @@ class Solution:
     def FindNumsAppearOnce(self, array):
         if not isinstance(array,list) or len(array) < 2:
             return
-        
+
         resultExclusiveOR = 0
         for item in array:
             resultExclusiveOR ^= item
-        
+
         indexOf1 = self.FindFirstBitIs1(resultExclusiveOR)
-        
+
         num1 = num2 = 0
         for item in array:
             if self.IsBit1(item,indexOf1):
                 num1 ^= item
             else:
                 num2 ^= item
-        
+
         return [num1,num2]
 
     def FindFirstBitIs1(self, num):
@@ -2555,7 +2549,7 @@ class Solution:
             num = num >> 1
             indexBit += 1
         return indexBit
-    
+
     def IsBit1(self, num, indexBit):
         num = num >> indexBit
         return num & 1
@@ -2581,7 +2575,7 @@ class Solution:
                 if bit != 0:
                     bitSum[i] += 1
                 bitMask = bitMask << 1
-        
+
         print(bitSum)
         result = 0
         for item in bitSum:
@@ -2589,7 +2583,7 @@ class Solution:
             result += item % 3
 
         return result
-    
+
 ```
 
 ### ==面试题57==：和为s的两个数字
@@ -2712,7 +2706,7 @@ class Solution:
         self.data = collections.deque()
         self.maximums = collections.deque()  #滑动窗口看出一个队列
         self.currentIndex = 0
-    
+
     def push_back(self, number):
         while len(self.maximums) != 0 and number >= self.maximums[0][0]:
             self.maximums.popleft()
@@ -2777,7 +2771,7 @@ class Solution:
     def IsContinuous(self, numbers):
         if not isinstance(numbers, list) or len(numbers) == 0:
             return False
-        
+
         numbers = sorted(numbers)
 
         numberOfZero = numbers.count(0)
@@ -2817,10 +2811,10 @@ class Solution:
     def MaxDiff(self, numbers):
         if not isinstance(numbers, list) or len(numbers) < 2:
             return 0
-        
+
         minOfNumbers = numbers[0]
         maxDiff = numbers[1] - minOfNumbers
-        
+
         for i in range(2, len(numbers)):
             if numbers[i-1] < minOfNumbers:
                 minOfNumbers = numbers[i-1]
@@ -2846,11 +2840,10 @@ class Solution:
             self.sum += n
             n -= 1
             return n>0 and self.Sum_Solution(n)
-           
+
         qiusum(n)
         return self.sum
 ```
-
 
 ### ==面试题65==：不用加减乘除做加法
 
@@ -2870,9 +2863,9 @@ class Solution:
 
 ### ==面试题68==：树中两个节点的最低公共祖先
 
- 情况 | 解题思路
----|---
-树为二叉搜索树，找最低公共祖先 | 当前节点 都大于p,q，则最低公共祖先在它的左子树；当前节点 都小于p,q 则最低公共祖先在它的右子树；当前节点在 p，q之间（包括等于) 则该节点就是最低公共祖先节点
-树包含父节点 | 这个问题，可以转换为 两个链表的第一个公共节点
-树是一课普通的树| 从根节点出发，看当前节点其子树是否包含p，q； 若当前节点子树包含p,q；而当前节点的所有子节点对应的子树都不包含p,q
-树是一课普通的树| 利用辅助空间，把根节点到p,q路径记录下成两个数组，找两个路径数组的最后一个相同节点；路径用递归+回溯
+| 情况 | 解题思路|
+|---|---|
+| 树为二叉搜索树，找最低公共祖先 | 当前节点 都大于p,q，则最低公共祖先在它的左子树；当前节点 都小于p,q 则最低公共祖先在它的右子树；当前节点在 p，q之间（包括等于) 则该节点就是最低公共祖先节点
+| 树包含父节点 | 这个问题，可以转换为 两个链表的第一个公共节点
+| 树是一课普通的树| 从根节点出发，看当前节点其子树是否包含p，q； 若当前节点子树包含p,q；而当前节点的所有子节点对应的子树都不包含p,q
+| 树是一课普通的树| 利用辅助空间，把根节点到p,q路径记录下成两个数组，找两个路径数组的最后一个相同节点；路径用递归+回溯
