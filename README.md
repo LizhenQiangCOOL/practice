@@ -144,7 +144,7 @@ Heapsort(A)
 |相关问题 | 题意 | 解题思路 | 编程注意
 |--- | --- |--- | --- |
 | [20. 有效的括号](https://leetcode-cn.com/problems/valid-parentheses/) |  括号是否匹配 | 利用栈，遇到右括号时就要出一个左口号 | 注意遍历完，栈减
-| [150. 逆波兰表达式求值 ](https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/)  | 构造逆波兰表达表达式 |利用栈，把计算值重新存在栈中，最后栈元素为结果 | 注意：两个树是否为负数时，如何整除
+| [150. 逆波兰表达式求值](https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/)  | 构造逆波兰表达表达式 |利用栈，把计算值重新存在栈中，最后栈元素为结果 | 注意：两个树是否为负数时，如何整除
 | [71. 简化路径  ](https://leetcode-cn.com/problems/simplify-path/)   | 简化文件路径  |利用栈，等于..如有就弹，等于.就忽略，正常路径则加入 |
 树遍历，前中后序遍历 144 94 145     |   树的遍历 | 递归很简单，非递归：利用栈，前序则要把右边先压栈； 中序，不停先把根节点压入，在压根节点的左元素，后序就是前序的转换 | 注意，中序的非递归
 | [341. 扁平化嵌套列表迭代器 ](https://leetcode-cn.com/problems/flatten-nested-list-iterator/)  |  列表内嵌列表->一个列表       | 使用队列存储，如果是列表则递归调用存储函数|
@@ -156,8 +156,6 @@ Heapsort(A)
 | [127. 单词接龙 ](https://leetcode-cn.com/problems/word-ladder/)  | 每次只能换一个字母，能不能从begin单词到end单词，能求最短转换序列   |构建图，然后层遍历
 | [347. 前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)|给一个数组，有数字，根据评率返回前k个 | 利用优先队列(堆)来实现 | 模块heapq 而heapq.heapify无key参数，heapq.nlargest有key参数
 | 23. 合并k个有序序列 | 将k个有序数组，归并成一个有序数组 | 时间复杂度最小，归并时应使用k大小的优先队列(堆)，每次拿出最小的只要log(k)时间复杂度 |  可以使用heapq.merge(*iterables(sort), key, reverse=False)
-
-
 
 ### 二叉树和递归
 
@@ -285,15 +283,17 @@ class Solution:
 | [474. 一和零](https://leetcode-cn.com/problems/ones-and-zeroes/) | 给多个01串，给M个0和N个1，最多能装多少个01串 | `dp[i][j]`看不同大小的背包，限制i为1的个数，j为0的个数；对每一个字符串，对每个可放的进去的背包：`dp[i][j] = max(dp[i][j], 1+dp[i- count1][j-count1]`| 不要把二维数组看成一个大背包，而是把二维数组每个`dp[i][j]`,看成一个背包
 | [139. 单词拆分](https://leetcode-cn.com/problems/word-break/)| 对于一字符串，能否拆成一个或多个在字典出现的单词 | dp[i], 表示长度为i的字符串 是否装了单词，`dp[i] = dp[i] or dp[i-len(k)]`, k表示单前单词，能否装进去 | 一位数组，每个值看成一个背包， 对于一个单词，遍历能完好装得下它的背包
 
+## 剑指office
 
-## 剑指office 
+### ==面试题3==：数组中重复的数字
 
-#### ==面试题3==：数组中重复的数字
 题目一：找出数组中重复的数字：在一个长度为n的数组里所有数字都在0~n-1的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了多少次。请找出数组中任意一个重复的数字。例如,如果输入长度为7的数组[2,3,1,0,2,5,3],那么对应输出的数字2或者3
+
 - 方法一：排序，遍历一遍。 时间复杂度O（nlgn），空间复杂度O（1）
 - 方法二：哈希表（字典法），用数组建立一个哈希表，或者直接用py的dict字典，遍历一遍。时间复杂度O（n），空间复杂度O（n）
-> - 最优方法：巧妙的。值为i的 数字应该在下标i，除非已被占，意思该值已重复，否则交换值i到下标i，看重新得的值是否满足条件(2个)。时间复杂度O(n),空间复杂度O(1)
-```
+- 最优方法：巧妙的。值为i的 数字应该在下标i，除非已被占，意思该值已重复，否则交换值i到下标i，看重新得的值是否满足条件(2个)。时间复杂度O(n),空间复杂度O(1)
+
+```python
 #这里输出所有重复的数字，题目中数字范围0~n-1十分关键，这样值和下标能对应
 
 def duplicate(arr):
@@ -312,13 +312,15 @@ def duplicate(arr):
     return False,0
 
 ```
+
 题目二：不修改数组找出重复的数字：在一个长度为n+1的数组里的所有数字都在1~n的范围内，所以数组中至少有一个数字是重复的。请找出数组中任意一个重复的数字，但不能修改输入的数组。例如，如果输入长度为8的数组{2, 3, 5, 4, 3, 2, 6, 7}, 那么对应的输出是重复的数字2或者3
-```
+
+```python
 #这里重复数字的 次数可能多次， 分组看arr范围中个数 与 范围差的比较
 def getDuplication(arr):
     if not isinstance(arr, list) or len(arr)==0:
         return -1
-    
+        
     start = 1
     end =len(arr) + 1
     while end>=start:
@@ -339,17 +341,20 @@ def countRange(arr, start, end):
     return len([x for x in arr if x>=start and x<=end])
 ```
 
-###### 测试用例
+>#### 测试用例
+
 - 长度为n的数组里包含一个或多个重复的数字
 - 数组中不包括重复的数字
 - 无效输入测试用例（输入空指针；长度为n的数组中包含0~n-1之外的数字）
 
-#### ==面试题4==：二维数组中的查找
+### ==面试题4==：二维数组中的查找
+
 题目：在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。
 
 - 方法一：二分找上界，二分找下界，再二分查找
-> - 方法二：利用已排序的性质，对比，缩小范围
-```
+- 方法二：利用已排序的性质，对比，缩小范围
+
+```python
 #方法一
 class Solution:
     # array 二维列表
@@ -370,7 +375,6 @@ class Solution:
                 else:
                     left = mid + 1
             return left
-        
         def  erfen(arr,left,right,k):
             while left < right:
                 mid = (left + right + 1) // 2
@@ -403,14 +407,19 @@ class Solution:
                 col += 1
         return False
 ```
-###### 测试用例
+
+#### 测试用例
+
 - 二维数组中包含查找的数字
 - 二维数组中没有查找的数字
 - 特殊输入测试（数组为空）
 
-#### ==面试题5==：替换空格
+### ==面试题5==：替换空格
+
 题目：请实现一个函数，把字符串中每个空格替换成%20，例如，输入"We are happy"，则输出"We%20are%20happy"
+
 - 方法：数组手动遍历，空格换%20。或者直接调用字符串.replace
+
 ```
 def replaceSpace(s):
         return s.replace(" ", "%20")
@@ -424,6 +433,7 @@ def replaceSpace(self, s):
             L.append(item)
     return "".join(L)
 ```
+
 ###### 测试用例
 - 输入的字符串包含空格（空格位置前中后，空格一个或连续多个）
 - 输入字符串没有空格
@@ -432,8 +442,10 @@ def replaceSpace(self, s):
 
 #### ==面试题6==：从尾到头打印链表
 题目：输入一个链表的头节点，从尾到头反过来打印出每个节点的值。
+
 - 方法一：存储逆置，打印
 - 方法二：利用栈或递归，实现
+
 ```
 # -*- coding:utf-8 -*-
 # class ListNode:
@@ -464,13 +476,16 @@ class Solution:
         ListReverse(listNode,L)
         return L
 ```
+
 ###### 测试用例
 - 功能测试(输入的链表有多个节点；输入的链表只有一个节点)
 - 特殊输入测试(输入的链表头节点指针为nullptr)
 
 ####  ==面试题7==：重构二叉树
 题目：输入某二叉树的前序遍历和中序遍历的结果，请重建该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如，输入前序遍历序列{1，2，4，7，3，5，6，8}和中序遍历序列{4，7，2，1，5，3，8，6}，则重建并输出它的头节点
+
 - 方法：分治法，分左子树右子树递归，
+  
 ```
 # -*- coding:utf-8 -*-
 # class TreeNode:
@@ -496,6 +511,7 @@ class Solution:
                 return T
         return rcBinaryTree(pre,tin)
 ```
+
 ###### 测试用例
 - 普通二叉树(完全二叉树；不完全二叉树)
 - 特殊二叉树(所有节点都没有右子节点的二叉树；所有节点都没有左子节点的二叉树；只有一个节点的二叉树)
@@ -504,6 +520,7 @@ class Solution:
 
 #### ==面试题8==：二叉树的下一个节点
 题目：给定一课二叉树和其中的一个节点，如何找到中序遍历序列的下一个节点？树中节点除了有两个分别指向左、右子节点的指针，还有一个指向父节点的指针
+
 ```
 class TreeNode:
     def __init__(self,x):
@@ -531,7 +548,9 @@ class Solution:
 
 #### ==面试题9==：用两个栈实现一个队列
 题目：用两个栈实现一个队列。队列的声明如下，请实现它的两个函数appendTail和deleteHead，分别完成在队列尾部插入节点和在队列头部删除节点的功能
+
 - 方法：入队：栈一 push ， 出队：栈二 不为空 pop，为空 栈一pop所有元素 至 栈二push
+  
 ```
 # -*- coding:utf-8 -*-
 class Solution:
@@ -548,6 +567,7 @@ class Solution:
                 self.stack2.append(self.stack1.pop())
         return self.stack2.pop()
 ```
+
 **类似题目：**
 - 两个队实现一个栈
 
@@ -555,6 +575,7 @@ class Solution:
 
 #### ==面试题10==：斐波那契数列
 题目一：求斐波那契数列的第n项。写一个函数，输入n，求斐波那契数列的第n项，斐波那契数列定义如下：f(0) = 0 , f(1) = 1 , f(n) = f(n-1) + f(n-2)
+
 ```
 def Fibonacci(n:int)->[int,None]:
     if n<0:
@@ -569,8 +590,10 @@ def Fibonacci(n:int)->[int,None]:
         fibNMinusTwo,fibNMinusOne = fibNMinusOne,fibN
     return fibN
 ```
+
 题目二：青蛙跳台阶问题：一只青蛙一次可以跳1级台阶，也可以跳上2级台阶。求该青蛙跳上一个n级的台阶总共有多少种跳法
-```
+
+```python
 def jumpFloor(number:int)->int:
     if number<1:
         return 0
@@ -584,6 +607,7 @@ def jumpFloor(number:int)->int:
         fibTwo,fibOne = fibOne,fibN
     return fibN
 ```
+
 题目三：青蛙变态跳台阶问题：青蛙一次可以跳1或2或3...n级台阶
 ```
 #数学归纳证明f(n)= 2**(k-1)
