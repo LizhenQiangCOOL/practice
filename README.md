@@ -184,6 +184,7 @@ Heapsort(A)
 | [230. 二叉搜索树中第K小的元素](https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst/)|给定二叉搜索树，找第k个小的元素 | 中序遍历，递归；可以记录一个前一个值； 也可以把这个值当函数返回，要参考剑指offic  | 注意：k为全局的
 
 - 删除二叉搜索树中节点，并且无父亲节点
+
 ```
 
 class TreeNode:
