@@ -341,7 +341,7 @@ def countRange(arr, start, end):
     return len([x for x in arr if x>=start and x<=end])
 ```
 
->#### 测试用例
+> 测试用例
 
 - 长度为n的数组里包含一个或多个重复的数字
 - 数组中不包括重复的数字
@@ -408,7 +408,7 @@ class Solution:
         return False
 ```
 
-#### 测试用例
+> 测试用例
 
 - 二维数组中包含查找的数字
 - 二维数组中没有查找的数字
@@ -420,7 +420,7 @@ class Solution:
 
 - 方法：数组手动遍历，空格换%20。或者直接调用字符串.replace
 
-```
+```python
 def replaceSpace(s):
         return s.replace(" ", "%20")
 #手动走
@@ -434,7 +434,8 @@ def replaceSpace(self, s):
     return "".join(L)
 ```
 
-###### 测试用例
+> 测试用例
+
 - 输入的字符串包含空格（空格位置前中后，空格一个或连续多个）
 - 输入字符串没有空格
 - 特殊输入（空字符串，空格字符串、空格一个或连续多个）
