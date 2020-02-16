@@ -440,14 +440,14 @@ def replaceSpace(self, s):
 - 输入字符串没有空格
 - 特殊输入（空字符串，空格字符串、空格一个或连续多个）
 
+### ==面试题6==：从尾到头打印链表
 
-#### ==面试题6==：从尾到头打印链表
 题目：输入一个链表的头节点，从尾到头反过来打印出每个节点的值。
 
 - 方法一：存储逆置，打印
 - 方法二：利用栈或递归，实现
 
-```
+```python
 # -*- coding:utf-8 -*-
 # class ListNode:
 #     def __init__(self, x):
@@ -465,7 +465,7 @@ class Solution:
             listNode = listNode.next
         l.reverse()
         return l
-    
+
     #方法二利用栈或递归，实现
     def printListFromTailToHead(self, listNode):
         def ListReverse(listNode,L):
@@ -478,16 +478,18 @@ class Solution:
         return L
 ```
 
-###### 测试用例
+> 测试用例
+
 - 功能测试(输入的链表有多个节点；输入的链表只有一个节点)
 - 特殊输入测试(输入的链表头节点指针为nullptr)
 
-####  ==面试题7==：重构二叉树
+### ==面试题7==：重构二叉树
+
 题目：输入某二叉树的前序遍历和中序遍历的结果，请重建该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如，输入前序遍历序列{1，2，4，7，3，5，6，8}和中序遍历序列{4，7，2，1，5，3，8，6}，则重建并输出它的头节点
 
 - 方法：分治法，分左子树右子树递归，
   
-```
+```python
 # -*- coding:utf-8 -*-
 # class TreeNode:
 #     def __init__(self, x):
@@ -513,16 +515,17 @@ class Solution:
         return rcBinaryTree(pre,tin)
 ```
 
-###### 测试用例
+> 测试用例
+
 - 普通二叉树(完全二叉树；不完全二叉树)
 - 特殊二叉树(所有节点都没有右子节点的二叉树；所有节点都没有左子节点的二叉树；只有一个节点的二叉树)
 - 特殊输入测试(二叉树的根节点指针为nullptr；输入的前序遍历和中序遍历序列不匹配)
 
+### ==面试题8==：二叉树的下一个节点
 
-#### ==面试题8==：二叉树的下一个节点
 题目：给定一课二叉树和其中的一个节点，如何找到中序遍历序列的下一个节点？树中节点除了有两个分别指向左、右子节点的指针，还有一个指向父节点的指针
 
-```
+```python
 class TreeNode:
     def __init__(self,x):
         self.val = x
@@ -546,13 +549,13 @@ class Solution:
             return TNode.p
 ```
 
+### ==面试题9==：用两个栈实现一个队列
 
-#### ==面试题9==：用两个栈实现一个队列
 题目：用两个栈实现一个队列。队列的声明如下，请实现它的两个函数appendTail和deleteHead，分别完成在队列尾部插入节点和在队列头部删除节点的功能
 
 - 方法：入队：栈一 push ， 出队：栈二 不为空 pop，为空 栈一pop所有元素 至 栈二push
   
-```
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def __init__(self):
@@ -570,14 +573,16 @@ class Solution:
 ```
 
 **类似题目：**
+
 - 两个队实现一个栈
 
 方法：入栈：不为空的队push ， 出栈：不为空的队逐一出队到位空的队，只剩下一个pop
 
-#### ==面试题10==：斐波那契数列
+### ==面试题10==：斐波那契数列
+
 题目一：求斐波那契数列的第n项。写一个函数，输入n，求斐波那契数列的第n项，斐波那契数列定义如下：f(0) = 0 , f(1) = 1 , f(n) = f(n-1) + f(n-2)
 
-```
+```python
 def Fibonacci(n:int)->[int,None]:
     if n<0:
         return None
@@ -610,7 +615,8 @@ def jumpFloor(number:int)->int:
 ```
 
 题目三：青蛙变态跳台阶问题：青蛙一次可以跳1或2或3...n级台阶
-```
+
+```python
 #数学归纳证明f(n)= 2**(k-1)
 #即证：当n>=2,2**0+2**1+...2**(k-2)+1 = 2**(k-1)
 
@@ -620,8 +626,10 @@ def jumpFloorII(number:int)->int:
         else:
             return pow(2,number-1)
 ```
+
 - 用2x1的小矩形去覆盖2xN 的大矩形，总共有多少种方法
-```
+
+```python
 def rectCover(number:int)->int:
         if number<1:
             return 0
@@ -636,9 +644,11 @@ def rectCover(number:int)->int:
         return fibN
 ```
 
-#### ==面试题11==：旋转数组的最小数字
+### ==面试题11==：旋转数组的最小数字
+
 题目：把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素。例如，数组{3，4，5，1，2}为{1，2，3，4，5}的一个旋转，该数组的最小值为1
-```
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def minNumberInRotateArray(self, rotateArray):
@@ -661,7 +671,8 @@ class Solution:
         return rotateArray[middle]
 ```
 
-#### ==面试12==：矩阵中的路径
+### ==面试12==：矩阵中的路径
+
 题目：请设计一个函数，用来判断在一个矩阵中是否存在一条包括某字符串所有字符的路径。路径可以从矩阵中的任意一格开始，每一步可以在矩阵中向左、右、上、下移动一格。如果一条路径经过了矩阵的某一格，那么该路径不能再次进入该格子。例如，在下面的3x4的矩阵中包含一条字符串“bfce”的路径。但矩阵中不包含字符串“abfb”的路径，因为字符串的第一个字符b占据了矩阵中的第一行第二格子之后，路径不能再次进入这个格子。
 
 a | b | t | g 
@@ -670,7 +681,8 @@ c | f | c | s
 j | d | e | h
 
 - 回溯法
-```
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def hasPath(self, matrix, rows, cols, path):
@@ -697,10 +709,14 @@ class Solution:
                 visited[i*cols+j] = False
         return hasPathFlag
 ```
-#### ==面试题13==：机器人的运动范围
+
+### ==面试题13==：机器人的运动范围
+
 题目：地上有一个m行n列的方格。一个机器人从坐标(0, 0)的格子开始移动， 它每次可以向左、右、上、下移动一格，但不能进入行坐标和列坐标的位数之和大于k的格子。例如，当k=18时，机器人能够进入方格(35, 37)，因为3+5+3+7=18。但它不能进入方格(35,38), 应为3+5+3+8=19.请问该机器人能够到达多少个格子？
+
 - 回溯法
-```
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def movingCount(self, threshold, rows, cols):
@@ -728,11 +744,14 @@ class Solution:
         # write code here
 ```
 
-#### ==面试题14==：剪绳子
+### ==面试题14==：剪绳子
+
 题目：给你一根长度为n的绳子，请把绳子剪成m段（m、n都是整数，n>1 并且m>1)，每段绳子的长度记为k[0],k[1]...k[m].请问k[0]xk[1]x...xk[m]可能的最大乘积是多少？例如，当绳子的长度是8时，我们把他剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。
+
 - 动态规划：求最优解 、整体问题最优解依赖于各子问题最优解 、子问题有重叠更小子问题 、从上往下分析问题,从下往上求解问题、子问题最优解存储。  
 - 贪心算法：当前最优导致局部最优，一般需要用数学方法证明正确性
-```
+
+```python
 #动态规划 时间复杂度O(n**2) 空间复杂度O(n)
 def maxProductAfterCutting_solution(length):
     if length<2:
@@ -772,9 +791,9 @@ def maxProductAfterCutting_solution(length):
     return (3**timesOf3)*(2**timesOf2)
 ```
 
-#### ==面试题15==：二进制中1的个数
-题目：请实现一个函数，输入一个整数，输出该数二进制表示中1的个数。例如，把9表示成二进制是1001，有2位是1。因此，如果输入9，则该函数输出2。s
+### ==面试题15==：二进制中1的个数
 
+题目：请实现一个函数，输入一个整数，输出该数二进制表示中1的个数。例如，把9表示成二进制是1001，有2位是1。因此，如果输入9，则该函数输出2。s
 
 - 二进制位运算
 
@@ -784,7 +803,8 @@ def maxProductAfterCutting_solution(length):
 
 - ==左移==运算符m<<n：把m左移n位，最左边n位将被抛弃，同时最右边补n个0 （比如一个规定8位的数字）
 - ==右移==运算符m>>n, 要注意若数字原先为正数，则右移后最左边补n个0，若数字原先为负数，则右移后最左边补n个1  （负数，最左符号位为一）
-```
+
+```python
 # python 常规解法 利用左移,32位要遍历一遍
 # -*- coding:utf-8 -*-
 class Solution:
@@ -813,14 +833,16 @@ class Solution:
             n = (n - 1) & n
         return count
 ```
-#### ==面试题16==：数值的整数次方
+
+### ==面试题16==：数值的整数次方
+
 题目：实现函数double Power(double base, int exponent), 求base的exponent次方。不得使用库函数，同时不需要考虑大数问题
 
 - 解法：
 - a^n = a^(n/2) * a^(n/2)   n为偶数
 - a^n = a^(n-1 /2) * a^(n-1 /2) * a     n为奇数
 
-```
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def Power(self, base, exponent):
@@ -853,11 +875,15 @@ class Solution:
             result*=base
         return result
 ```
-#### ==面试题17==：打印从一到最大的n位数
+
+### ==面试题17==：打印从一到最大的n位数
+
 题目：输入数字n，按顺序打印出从1到最大的n位十进制数。比如输入3，则打印出1、2、3一直到最大的3位数999
+
 - 该题目用c/c++做需要考虑数的大小，用数组来存储该数字，模拟数字加法，
 - 该问题能转换成数字排列的解法，递归让代码更简洁
-```
+
+```python
 #python3 则不需要考虑数字大小，数值是不限制长度的
 def Print1ToMax(n:int)->None:
     number = 1
@@ -871,11 +897,14 @@ def Print1ToMax(n:int)->None:
 #c/c++
 ```
 
-#### ==面试题18==：删除链表节点
+### ==面试题18==：删除链表节点
+
 **题目一：**在O(1)时间内删除链表节点。给定单向链表的头指针和一个节点指针，定义一个函数在O(1)时间内删除该节点。
+
 - 常规方法：遍历找出，然后删除 
 - 时间0(1)方法：删除节点在中间有后续节点，只要要后续节点值复制过来，把后续节点删，就相当于删除了想要删除的节点。另外还有两种情况：1、链表只有一节点，删除头节点（也是尾节点）2、删除节点为最后一节点，则还是需要遍历一遍.  *（这都建立在该删除节点一定在链表中）*
-```
+
+```python
 # -*- coding:utf-8 -*-
 class ListNode:
     def __init__(self, x):
@@ -897,9 +926,12 @@ class Solution:
                 pNode = pNode.next
             pNode.next = None
 ```
+
 **题目二：**删除链表中重复的节点。在一个排序的链表中，如何删除重复的节点，意思有重复的都不要
+
 - 方法：遍历一遍，设置flag，设置双指针，该节点不与下一节点值相同时，双指针后移，否则要进去找到一个不同值的节点A，前指针pPreNode的next就要指向节点A，这里注意前指针为空时，应该头指针指向节点A
-```
+
+```python
 # -*- coding:utf-8 -*-
 # class ListNode:
 #     def __init__(self, x):
@@ -933,13 +965,15 @@ class Solution:
         return pHead
 ```
 
-#### ==面试题19==：正则表达匹配
+### ==面试题19==：正则表达匹配
+
 题目：请实现一个函数用来匹配包含"."和"\*"的正则表达式。模式中的字符"."表示任意一个字符，而"\*"表示踏前面的字符可以出现任意次（含0次）。在本题中，匹配是指字符串中所有字符匹配整个模式。例如，字符串"aaa",与模式"a.a"和"ab\*ac\*a"匹配，但与"aa.a"和"ab*a"均不匹配
 
 - 方法：第一个字符串为 . 则可匹配任意字符，若为ch 则只可以匹配ch
--       第二个字符串为不是‘\*’，前一字符能否匹配，能则都后移，递归匹配，不能反回false  ， 若为‘\*’,匹配一位：字符串后移一位，正则后移两位，或 字符串后移一位，正则不动； 匹配0位：正则后移两位，字符串不动
+- 第二个字符串为不是‘\*’，前一字符能否匹配，能则都后移，递归匹配，不能反回false  ， 若为‘\*’,匹配一位：字符串后移一位，正则后移两位，或 字符串后移一位，正则不动； 匹配0位：正则后移两位，字符串不动
 - 递归思想
-```
+
+``` python
 # -*- coding:utf-8 -*-
 class Solution:
     # s, pattern都是字符串
@@ -966,9 +1000,11 @@ class Solution:
         return False
 ```
 
-#### ==面试题20==：表示数值的字符串
+### ==面试题20==：表示数值的字符串
+
 题目：请实现一个函数用来判断字符串是否表示数值(包含整数和小数)。例如，字符串“+100”、“5e2”、“-123”、“3.1416”及“-1E-16”都表示数值，但“12e”、“1a3.14”、“1.2.3”、“+-5”及“12e+5.4”都不是
-```
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     # s字符串
@@ -1000,11 +1036,14 @@ class Solution:
             return True
         return False
 ```
-#### ==面试题21==：调整数组顺序使奇数位于偶数前面
+
+### ==面试题21==：调整数组顺序使奇数位于偶数前面
+
 题目：输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有奇数位于数组的前半部分，所有偶数位于数组的后半部分。
 
 - 方法：前后双指针
-```
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def reOrderArray(self, array):
@@ -1033,9 +1072,11 @@ class Solution:
         return array,begin_index
 ```
 
-#### ==面试22==:链表中倒数第k个结点
+### ==面试22==:链表中倒数第k个结点
+
 题目：输入一个链表，输出该链表中倒数第k个节点。为了符合大多数人的习惯，本题从1开始计数，即链表的尾结点是倒数第1个节点。例如，一个链表有6个节点，从头节点开始，它们的值依次是1、2、3、4、5、6.这个链表的倒数第3个节点是值为4的节点。
-```
+
+```python
 # -*- coding:utf-8 -*-
 # class ListNode:
 #     def __init__(self, x):
@@ -1060,11 +1101,12 @@ class Solution:
             pBchild = pBchild.next
         return pBchild
 ```
-双指针
 
-#### ==面试23==：链表中环的入口结点
+### ==面试23==：链表中环的入口结点
+
 题目：如果一个链表中包含环，如何找出环的入口节点？例如，在如图3.8所示的链表中，环的入口节点是节点3
-```
+
+```python
 # -*- coding:utf-8 -*-
 # class ListNode:
 #     def __init__(self, x):
@@ -1105,7 +1147,8 @@ class Solution:
         return None
 ```
 
-#### ==面试题24==：反转链表
+### ==面试题24==：反转链表
+
 题目：定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。
 ```
 # -*- coding:utf-8 -*-
@@ -1136,9 +1179,11 @@ class Solution:
         return pre
 ```
 
-#### ==面试题25==：合并两个排序的链表
+### ==面试题25==：合并两个排序的链表
+
 题目：输入两个递增排序的链表，合并这两个链表并使新链表中的节点任然是递增排序的。
-```
+
+```python
 # -*- coding:utf-8 -*-
 # class ListNode:
 #     def __init__(self, x):
@@ -1163,9 +1208,11 @@ class Solution:
 
 ```
 
-#### ==面试题26==：树的子结构
+### ==面试题26==：树的子结构
+
 题目：输入两棵二叉树A和B，判断B是不是A的子结构
-```
+
+```python
 # -*- coding:utf-8 -*-
 # class TreeNode:
 #     def __init__(self, x):
@@ -1200,9 +1247,11 @@ class Solution:
             return False
 ```
 
-#### ==面试题27==：二叉树的镜像
+### ==面试题27==：二叉树的镜像
+
 题目：请完成一个函数：输入一棵二叉树，该函数输出它的镜像。
-```
+
+```python
 # -*- coding:utf-8 -*-
 # class TreeNode:
 #     def __init__(self, x):
@@ -1224,9 +1273,11 @@ class Solution:
         return root                                      
 ```
 
-#### ==面试题28==：对称的二叉树
+### ==面试题28==：对称的二叉树
+
 题目：请实现一个函数，用来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的。
-```
+
+```python
 # -*- coding:utf-8 -*-
 # class TreeNode:
 #     def __init__(self, x):
@@ -1246,9 +1297,11 @@ class Solution:
         return isSymmetricalcore(pRoot1.left, pRoot2.right) and isSymmetricalcore(pRoot1.right, pRoot2.left)
 ```
 
-#### ==面试题29==：顺时针打印矩阵
+### ==面试题29==：顺时针打印矩阵
+
 题目：输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字：
-```
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     # matrix类型为二维列表，需要返回列表
@@ -1279,14 +1332,17 @@ class Solution:
                 result.append(matrix[i][start])
 ```
 
-#### ==面试题30==：包含min函数的栈
+### ==面试题30==：包含min函数的栈
+
 题目：定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的min函数。在该栈中，调用min、push及pop的时间复杂度都是O(1)
 
 - 思路：用主栈加一个min辅助栈
+
 1. push元素入主栈，push元素比辅助栈小则压入，否则辅助栈压入辅助栈顶元素
 2. pop两个栈都弹出
 3. min返回辅助栈栈顶元素
-```
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def __init__(self):
@@ -1308,14 +1364,17 @@ class Solution:
         return self.min_stack[-1]
 ```
 
-#### ==面试题31==：栈的压入、弹出序列
+### ==面试题31==：栈的压入、弹出序列
+
 题目：输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个系列是否为该栈的弹出序列。假设压入栈的所有数字均不相等。
 
 - 思路：需要一个栈
+
 1. 依次取出弹栈序列的第一个元素A，如果它在栈中，看弹栈
 2. 不栈：依次把压入序列的第一个，且不等于A的压入。循环结束 判断压入栈是否为空，是则返回False，否则删
 3. 外层循环结束，则返回True
-```
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def IsPopOrder(self, pushV, popV):
@@ -1334,10 +1393,12 @@ class Solution:
         return True
 ```
 
-#### ==面试题32==：从上到下打印二叉树
+### ==面试题32==：从上到下打印二叉树
+
 题目一：不分行从上到下打印二叉树
 类似图算法-广度搜索BFS
-```
+
+```python
 from collections import deque
 # -*- coding:utf-8 -*-
 # class TreeNode:
@@ -1362,10 +1423,13 @@ class Solution:
                 d.appendleft(Node.right)
         return result
 ```
+
 题目二：分行从上到下打印二叉树
+
 - 处理一：需要一个变量记录当前行 还没打印的元素数量
 - 处理二：BFS 压入队列的元素，增加一个层数标记
-```
+  
+```python
 from collections import deque
 #-*- coding:utf-8 -*-
 #class TreeNode:
@@ -1402,10 +1466,13 @@ class Solution:
                 nextLevel = 0
         return result
 ```
+
 题目三：之字形打印二叉树
+
 - BFS 压入队列的元素，增加一个层数标记
 - 增加一个变量flag=0,1 表示当前行是正向打印，还是逆向打印
-```
+  
+```python
 #-*- coding:utf-8 -*-
 class TreeNode:
     def __init__(self, x):
@@ -1442,11 +1509,14 @@ class Solution:
                 next = 1- next
 ```
 
-#### ==面试题33==：二叉搜索树的后序遍历序列
+### ==面试题33==：二叉搜索树的后序遍历序列
+
 题目：输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历结果。
+
 - 方法一：直接后序遍历，对比数组
 - 方法二：数组前部分（比根小）为左子树的，数组后部分(比根大)为右子树的
-```
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def VerifySquenceOfBST(self, sequence):
@@ -1471,12 +1541,14 @@ class Solution:
         return left and right
 ```
 
-#### ==面试题34==：二叉树中和为某一值得路径
+### ==面试题34==：二叉树中和为某一值得路径
+
 题目：输入一棵二叉树和一个整数，打印出二叉树中节点值得和为输入整数的所有路径。从树的根节点开始往下一直到叶节点所经过的几点形成一条路径。
 
 - 思路：前序遍历，加path存储路径，res存储最终结果
 - 判断
-```
+
+```python
 # -*- coding:utf-8 -*-
 # class TreeNode:
 #     def __init__(self, x):
@@ -1508,12 +1580,14 @@ class Solution:
         path.pop()
 ```
 
-#### ==面试题35==：复杂链表的复制
+### ==面试题35==：复杂链表的复制
+
 题目：请实现一个函数复制一个复杂链表。在复杂链表中，每个节点除了有一个next指针，还有一个pSibling指向链表中的任意节点或者nullptr。
 
 - 思路：
 - 方法一： 优化定位pSibling，遍历复制链表，同时，用hash表存储
-```
+  
+```python
 # -*- coding:utf-8 -*-
 # class RandomListNode:
 #     def __init__(self, x):
@@ -1561,8 +1635,9 @@ class Solution:
         return pClonedHead
 ```
 
-#### ==面试题36==：二叉搜索树与双向链表
-```
+### ==面试题36==：二叉搜索树与双向链表
+
+```python
 # -*- coding:utf-8 -*-
 # class TreeNode:
 #     def __init__(self, x):
@@ -1595,8 +1670,9 @@ class Solution:
             self.ConvertNode(pCurrent.right)
 ```
 
-#### ==面试题37==：序列化二叉树
-```
+### ==面试题37==：序列化二叉树
+
+```python
 #利用下标
 # -*- coding:utf-8 -*-
 # class TreeNode:
@@ -1650,8 +1726,9 @@ class Solution:
         return root
 ```
 
-#### ==面试题38==：字符串的排序
-```
+### ==面试题38==：字符串的排序
+
+```python
 #利用库函数
 # -*- coding:utf-8 -*-
 import itertools
@@ -1685,9 +1762,11 @@ class Solution:
 
 ```
 
-#### ==面试题39==：数组中出现次数超过一半的数字
+### ==面试题39==：数组中出现次数超过一半的数字
+
 - 方法一：基于Partition函数，出现次数超过一半的数字一定会位于数组中间位置
-```
+
+```python
 # -*- coding:utf-8 -*-
 import random
 class Solution:
@@ -1754,15 +1833,16 @@ class Solution:
         if numbers.count(result)*2<= len(numbers):
             return False
         else:
-            return True
-                
-        
+            return True   
 ```
-#### ==面试题40==：最小的k个数
+
+### ==面试题40==：最小的k个数
+
 题目：输入n个整数，找出其中最小的k个数。例如，输入的4、5、1、6、2、7、3、8 这8个数字，则最小的4个数字是1、2、3、4.
 
 - 注意要先弄清题目的要求，包裹输入的数据量多大，能否一次性载入内存，是否允许交换输入数据中数字的顺序
-```
+
+```python
 #时间复杂度为o(nlgn)
 # -*- coding:utf-8 -*-
 class Solution:
@@ -1814,8 +1894,9 @@ class Solution:
 ```
 
 
-#### ==面试题41==：数据流中的中位数
-```
+### ==面试题41==：数据流中的中位数
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def __init__(self):
@@ -1830,9 +1911,9 @@ class Solution:
 ```
 
 
-#### ==面试题42==：连续子数组的最大和
+### ==面试题42==：连续子数组的最大和
 
-```
+```python
 #数组规律
 # -*- coding:utf-8 -*-
 class Solution:
@@ -1856,8 +1937,9 @@ class Solution:
         return nGreatestSum if nGreatestSum>0 else maxitem
 ```
 
-#### ==面试题43==：1~n整数中1出现的次数
-```
+### ==面试题43==：1~n整数中1出现的次数
+
+```python
 # 时间复杂度 o(nlogn)
 # -*- coding:utf-8 -*-
 class Solution:
@@ -1912,8 +1994,9 @@ class Solution:
         return numFirstDigit + numOtherDigits + numRecursive
 ```
 
-#### ==面试题44==：数字序列中某一位的数字
-```
+### ==面试题44==：数字序列中某一位的数字
+
+```python
 class Solution:
     def digitAtIndex(self, index):
         if index < 0:
@@ -1946,8 +2029,9 @@ class Solution:
         return pow(10,digits-1)
 ```
 
-#### ==面试题45==：把数组排成最小的数
-```
+### ==面试题45==：把数组排成最小的数
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def PrintMinNumber(self, numbers):
@@ -1969,10 +2053,11 @@ class Solution:
 ```
 
 
-#### ==面试题46==：把数字翻译成字符串
+### ==面试题46==：把数字翻译成字符串
 
 f(i) = f(i+1)+g(i,i+1)*f(i+2) 注：f(i)表示从第i位数字开始的不同翻译的数目
-```
+
+```python
 class Solution:
     def GetTranslationCount(self, number):
         if number<0:
@@ -2001,8 +2086,9 @@ class Solution:
         resultcount = counts[0]
 ```
 
-#### ==面试题47==：礼物的最大价值
-```
+### ==面试题47==：礼物的最大价值
+
+```python
 class Solution:
     def getMaxvalue(self,values):
         rows = len(values)
@@ -2023,8 +2109,9 @@ class Solution:
         return maxValues[cols-1]
 ```
 
-#### ==面试题48==：最长不含重复字符的子字符串
-```
+### ==面试题48==：最长不含重复字符的子字符串
+
+```python
 class Solution:
     def longestSubstrWithoutDuplication(self,SS):
         if not isinstance(SS,str) or len(SS) == 0:
@@ -2069,8 +2156,9 @@ class Solution:
         return res
 ```
 
-#### ==面试题49==：丑数
-```
+### ==面试题49==：丑数
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def GetUglyNumber_Solution(self, index):
@@ -2101,10 +2189,11 @@ class Solution:
 
 ```
 
-#### ==面试题50==:第一次只出现一次的字符
+### ==面试题50==:第一次只出现一次的字符
 
 题目一：字符串中第一个只出现一次的字符
-```
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def FirstNotRepeatingChar(self, s):
@@ -2122,14 +2211,16 @@ class Solution:
                 return index
         return -1
 ```
+
 相关题目
+
 - 定义一函数，输入两字符串，从第一个字符串中删除在第二个字符串中出现过的所有字符
 - 定义一函数，删除字符串中所有重复出现的字符
 - 在英语中，如果两个单词中出现的字母相同，并且每个字母出现的次数也相同，那个这两个单词互为变位词。(字母无位置要求)。如何判断两字符串，是否为变位词
 
-
 题目二：字符流中第一个值出现一次的字符
-```
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def __init__(self):
@@ -2153,8 +2244,9 @@ class Solution:
         return result
 ```
 
-#### ==面试题51==：数组中的逆序对
-```
+### ==面试题51==：数组中的逆序对
+
+```python
 # -*- coding:utf-8 -*-
 import copy
 class Solution:
@@ -2199,8 +2291,9 @@ class Solution:
         return left + right + count 
 ```
 
-#### ==面试题52==：两个链表的第一个公共节点
-```
+### ==面试题52==：两个链表的第一个公共节点
+
+```python
 # -*- coding:utf-8 -*-
 # class ListNode:
 #     def __init__(self, x):
@@ -2238,9 +2331,11 @@ class Solution:
 
 ```
 
-#### ==面试题53==：在排序数组中查找数字
+### ==面试题53==：在排序数组中查找数字
+
 题目一：数字在排序数组中出现的次数
-```
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def GetNumberOfK(self, data, k):
@@ -2275,7 +2370,8 @@ class Solution:
 ```
 
 题目二：0~n-1中缺失的数字
-```
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def GetMissingNumber(self, data):
@@ -2300,7 +2396,8 @@ class Solution:
 ```
 
 题目三：数组中数值和下标相等的元素
-```
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def GetNumberSameAsIndex(self,data):
@@ -2320,8 +2417,9 @@ class Solution:
         return -1
 ```
 
-#### ==面试题55==：二叉搜索树的第K大节点
-```
+### ==面试题55==：二叉搜索树的第K大节点
+
+```python
 # -*- coding:utf-8 -*-
 # class TreeNode:
 #     def __init__(self, x):
@@ -2351,9 +2449,11 @@ class Solution:
         return target
 ```
 
-#### ==面试题55==：二叉树的深度
+### ==面试题55==：二叉树的深度
+
 题目一：二叉树的深度
-```
+
+```python
 # -*- coding:utf-8 -*-
 # class TreeNode:
 #     def __init__(self, x):
@@ -2369,8 +2469,9 @@ class Solution:
         
         return nLeft + 1 if nLeft > nRight else nRight + 1
 ```
+
 题目二：平衡二叉树
-```
+```python
 # -*- coding:utf-8 -*-
 # class TreeNode:
 #     def __init__(self, x):
@@ -2421,9 +2522,11 @@ class Solution:
         return False
 ```
 
-#### ==面试题56==：数组中数字出现的次数
+### ==面试题56==：数组中数字出现的次数
+
 题目一：数组中只出现一次的两个数字
-```
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     # 返回[a,b] 其中ab是出现一次的两个数字
@@ -2459,7 +2562,8 @@ class Solution:
 ```
 
 题目二：数组中唯一只出现一次的数字
-```
+
+```python
 # -*- coding:utf-8 -*-
 #python2解 int 在32位机器上长度为32，在64位机器上长度为64
 #python3解 int 无限制长度，以最大的数字为标准
@@ -2488,8 +2592,9 @@ class Solution:
     
 ```
 
-#### ==面试题57==：和为s的两个数字
-```
+### ==面试题57==：和为s的两个数字
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def FindNumbersWithSum(self, array, tsum):
@@ -2513,10 +2618,11 @@ class Solution:
             #牛客网要求
             return sorted(result,key = lambda x: x[0] * x[1])[0]
         return result
-    
 ```
+
 题目二：和为s的连续正数序列
-```
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def FindContinuousSequence(self, tsum):
@@ -2541,9 +2647,11 @@ class Solution:
         return result
 ```
 
-#### ==题目58==：翻转字符串
+### ==题目58==：翻转字符串
+
 题目一：翻转单词顺序
-```
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def ReverseSentence(self, s):
@@ -2552,7 +2660,8 @@ class Solution:
 ```
 
 题目二：左旋转字符串
-```
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def LeftRotateString(self, s, n):
@@ -2565,9 +2674,11 @@ class Solution:
         return s[n:]+s[:n]
 ```
 
-#### ==面试题59==：队列的最大值
+### ==面试题59==：队列的最大值
+
 题目一：滑动窗口的最大值
-```
+
+```python
 # -*- coding:utf-8 -*-
 import collections
 class Solution:
@@ -2590,8 +2701,10 @@ class Solution:
             result.append(num[d[-1]])
         return result
 ```
+
 题目二：队列的最大值
-```
+
+```python
 # -*- coding:utf-8 -*-
 import collections
 class Solution:
@@ -2621,9 +2734,9 @@ class Solution:
         return self.maximums[-1][0]
 ```
 
+### ==面试题60==：n个骰子的点数
 
-#### ==面试题60==：n个骰子的点数
-```
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def __init__(self, g_maxValue = 6):
@@ -2656,8 +2769,9 @@ class Solution:
             print(f'{i} : {raito}')
 ```
 
-#### ==面试题61==：扑克牌中的顺子
-```
+### ==面试题61==：扑克牌中的顺子
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def IsContinuous(self, numbers):
@@ -2680,8 +2794,9 @@ class Solution:
         return False if numberOfGap > numberOfZero else True
 ```
 
-#### ==面试题62==：圆圈中最后剩下的数字
-```
+### ==面试题62==：圆圈中最后剩下的数字
+
+```python
 #使用数学寻找简单的方式
 # -*- coding:utf-8 -*-
 class Solution:
@@ -2694,8 +2809,9 @@ class Solution:
         return last
 ```
 
-#### ==面试题63==：股票的最大利润
-```
+### ==面试题63==：股票的最大利润
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def MaxDiff(self, numbers):
@@ -2716,8 +2832,9 @@ class Solution:
         return maxDiff
 ```
 
-#### ==面试题64==：求 1+2+...+n
-```
+### ==面试题64==：求 1+2+...+n
+
+```python
 # x and y ， 如果x 为False， x and y 返回 False，否则它返回y的计算值
 # 利用python的逻辑运算符，and 重复调用函数已达到累加的效果
 # -*- coding:utf-8 -*-
@@ -2735,8 +2852,9 @@ class Solution:
 ```
 
 
-#### ==面试题65==：不用加减乘除做加法
-```
+### ==面试题65==：不用加减乘除做加法
+
+```python
 # -*- coding:utf-8 -*-
 class Solution:
     def Add(self, num1, num2):
@@ -2750,7 +2868,7 @@ class Solution:
         return num1
 ```
 
-#### ==面试题68==：树中两个节点的最低公共祖先
+### ==面试题68==：树中两个节点的最低公共祖先
 
  情况 | 解题思路
 ---|---
@@ -2758,4 +2876,3 @@ class Solution:
 树包含父节点 | 这个问题，可以转换为 两个链表的第一个公共节点
 树是一课普通的树| 从根节点出发，看当前节点其子树是否包含p，q； 若当前节点子树包含p,q；而当前节点的所有子节点对应的子树都不包含p,q
 树是一课普通的树| 利用辅助空间，把根节点到p,q路径记录下成两个数组，找两个路径数组的最后一个相同节点；路径用递归+回溯
-
