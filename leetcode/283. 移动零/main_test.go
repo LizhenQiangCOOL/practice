@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func moveZeroes(nums []int) {
+func MoveZeroes(nums []int) {
 	// nums 为 切片, 为引用类型
 	var n int = len(nums)
 	var fast, slow int = 0, 0
@@ -30,17 +30,17 @@ func moveZeroes(nums []int) {
 	}
 }
 
-// func moveZeroes_leetcode(nums []int) {
-// 	var n int = len(nums)
-// 	var fast, slow int = 0, 0
-// 	for fast < n {
-// 		if nums[fast] != 0 {
-// 			nums[slow], nums[fast] = nums[fast], nums[slow]
-// 			slow++
-// 		}
-// 		fast++
-// 	}
-// }
+func MoveZeroes_leetcode(nums []int) {
+	var n int = len(nums)
+	var fast, slow int = 0, 0
+	for fast < n {
+		if nums[fast] != 0 {
+			nums[slow], nums[fast] = nums[fast], nums[slow]
+			slow++
+		}
+		fast++
+	}
+}
 
 func TestMoveZeroes(t *testing.T) {
 	var tests = []struct {
@@ -61,7 +61,7 @@ func TestMoveZeroes(t *testing.T) {
 	for _, tt := range tests {
 		testname := fmt.Sprintf("%v", tt.nums)
 		t.Run(testname, func(t *testing.T) {
-			moveZeroes(tt.nums)
+			MoveZeroes(tt.nums)
 			if !reflect.DeepEqual(tt.nums, tt.want) {
 				t.Errorf("got %v, want %v", tt.nums, tt.want)
 			}
