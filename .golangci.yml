@@ -1,0 +1,7 @@
+# Options for analysis running.
+run:
+  skip-dirs:
+    - practice-go/pkg/mod
+    - practice-go/pkg/sumdb
+    - pkg/mod
+    - pkg/sumdb
