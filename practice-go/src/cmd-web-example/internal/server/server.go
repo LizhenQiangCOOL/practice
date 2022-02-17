@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"my-web/cmd"
+	"my-web/internal/conf"
 	"my-web/internal/log"
 )
 
@@ -43,5 +44,11 @@ func (s *server) init() error {
 func (s *server) printInfo() {
 	fmt.Fprint(os.Stdout, "Themanager-api is running successfully! \n\n")
 	cmd.PrintVersion()
-
+	fmt.Fprintf(os.Stdout, "%-8s: %s:%d\n", "Listen", conf.ServerHost, conf.ServerPort)
+	if conf.SSLCert != "" && conf.SSLKey != "" {
+		fmt.Fprintf(os.Stdout, "%-8s: %s:%d\n", "HTTPS LIsten", conf.SSLHost, conf.SSLPort)
+	}
+	fmt.Fprintf(os.Stdout, "%-8s: %s\n", "Loglevel", conf.ErrorLogLevel)
+	fmt.Fprintf(os.Stdout, "%-8s: %s\n", "ErrorLogFile", conf.ErrorLogPath)
+	fmt.Fprintf(os.Stdout, "%-8s: %s\n\n", "AccessLogFile", conf.AccessLogPath)
 }
