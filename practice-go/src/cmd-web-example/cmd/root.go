@@ -7,8 +7,12 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"os/signal"
+	"syscall"
 
 	"my-web/internal/conf"
+	"my-web/internal/log"
+	"my-web/internal/server"
 
 	"github.com/spf13/cobra"
 )
@@ -22,10 +26,10 @@ var rootCmd = &cobra.Command{
 	Long:  `长描述-cmd-web服务器例子`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
-	Run: func(cmd *cobra.Command, args []string) {
+	RunE: func(cmd *cobra.Command, args []string) error {
 		fmt.Println("hello world")
-		manageAPI()
-		//return err
+		err := manageAPI()
+		return err
 	},
 }
 
@@ -45,16 +49,42 @@ func init() {
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
 
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.my-web.yaml)")
+	rootCmd.PersistentFlags().StringVarP(&conf.ConfigFile, "config", "c", "", "config file")
+	rootCmd.PersistentFlags().StringVarP(&conf.WorkDir, "work-dir", "p", ".", "current work directory")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	rootCmd.AddCommand(
+		newVersionCommand(),
+	)
 }
 
-func manageAPI() {
+func manageAPI() error {
 	conf.InitConf()
 	//配置都初始化到 conf.go 中全局变量
-	fmt.Printf("server port: %v", conf.ServerPort)
-	//log.InitLogger()
+	fmt.Printf("server port: %v \n", conf.ServerPort)
+	log.InitLogger()
+
+	s, err := server.NewServer(&server.Options{})
+	if err != nil {
+		return err
+	}
+
+	// start my-web API server
+	errSig := make(chan error, 5)
+	s.Start(errSig)
+
+	// Signal received to the process externally.
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+
+	select {
+	case sig := <-quit:
+		log.Infof("The my-web server receive %s and start shutting down", sig.String())
+		s.Stop()
+		log.Infof("See you next time!")
+	case err := <-errSig:
+		log.Error("The my-web server start failed: %s", err.Error())
+	}
+	return nil
 }

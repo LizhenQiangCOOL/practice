@@ -1,14 +1,9 @@
 package cmd
 
 import (
-	"fmt"
-	"os"
+	"my-web/internal/utils"
 
 	"github.com/spf13/cobra"
-)
-
-var (
-	version string
 )
 
 func newVersionCommand() *cobra.Command {
@@ -16,16 +11,7 @@ func newVersionCommand() *cobra.Command {
 		Use:   "version",
 		Short: "show cmd-web version",
 		Run: func(cmd *cobra.Command, args []string) {
-			PrintVersion()
+			utils.PrintVersion()
 		},
 	}
-}
-
-func getVersion() string {
-	return version
-}
-
-func PrintVersion() {
-	version := getVersion()
-	fmt.Fprintf(os.Stdout, "%-8s: %s\n", "Version", version)
 }

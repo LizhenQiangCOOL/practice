@@ -88,6 +88,7 @@ func InitConf() {
 
 func setupConfig() {
 	// setup config file path
+	// 没有设置configfile时，配置文件在WordDIR/conf查找
 	if ConfigFile == "" {
 		viper.SetConfigName("conf")
 		viper.SetConfigType("yaml")
