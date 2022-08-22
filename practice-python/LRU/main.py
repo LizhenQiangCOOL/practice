@@ -42,13 +42,12 @@ class DoublyLinkedList():
         self.tail: Node = Node(0,0)
 
     def append_to_front(self, node: Node):
-        # 链表插入前为空
-        if self.head.next is None:
-            self.tail.next = node
+        node.next = self.head.next
+        if node.next:
+            node.next.pre = node
         else:
-            node.next = self.head.next
-            if node.next:
-                node.next.pre = node
+            # 链表插入前为空
+            self.tail.next = node
         self.head.next = node
         node.pre = self.head
 
@@ -62,11 +61,11 @@ class DoublyLinkedList():
             else:
                 # 需要处理尾指针
                 self.tail.next = node.pre
+        else:
+            # 处理后一个节点的前驱
+            node.next.pre = node.pre
         # 处理前一个节点的后继
         node.pre.next = node.next
-        # 处理后一个节点的前驱
-        if node.next:
-            node.next.pre = node.pre
         # 移动到前面, 也要处理后继和前驱
         node.next = self.head.next
         self.head.next.pre = node
