@@ -1,4 +1,6 @@
-package algorithms
+package main
+
+import "fmt"
 
 type Node struct {
 	key   int
@@ -38,4 +40,8 @@ func (list *DoublyLinkedList) MoveToFront(node *Node) {
 
 	}
 	node.pre.next = node.next
+}
+
+func main() {
+	fmt.Println("1111111111")
 }
