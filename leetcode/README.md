@@ -1,6 +1,19 @@
 
 # 编程算法题（python解题）
 
+## Leetcode 题目Map
+
+| 题号  | 名称  | 类型 |
+|-----|-----|--|
+| 105 |  [105. 从前序与中序遍历序列构造二叉树](https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)| 二叉树遍历框架-前序遍历  |
+| 124 |  [124. 二叉树的最大路径和](https://leetcode.cn/problems/binary-tree-maximum-path-sum/)  | 二叉树遍历框架-后序遍历 |
+|     |     |  |
+
+
+
+
+
+
 ## Leetcode
 
 ### 数组类题目
