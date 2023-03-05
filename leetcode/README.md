@@ -182,28 +182,28 @@ class Solution:
 - 多重背包问题： 每个物品不止1个，有num(i)个
 - 多维费用背包，背包物品约束
 
-|相关问题 | 题意 | 解题思路 | 编程注意
-|--- | --- |--- | --- |
-| [70. 爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)     | n 阶，每次可以爬1或2台阶，多少种方法          | 推导式：f(n) = f(n-1)+f(n-2)                      | n小于0时特殊处理
-| [120. 三角形最小路径和](https://leetcode-cn.com/problems/triangle/) | 给定一个三角形，找出自顶向下的最小路径和      | 非第一和最后时，f(i, j)依赖f(i-1, j-1)和f(i-1, j) | 为第一和最后一个时 f(i,j)依赖项
-| [64. 最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)| MxN网格，从左上角到右下角，最小路径和         | f(i, j) 依赖于f(i, j-1)和f(i-1, j)                | 注意 i,j特殊情况，为0时
-| [343. 整数拆分](https://leetcode-cn.com/problems/integer-break/)    |整数N，拆分多个整数，这些整数的最大乘积        | f(N) 依赖于 max(f(i), i) 和 max(f(j), j), i+j=N   | 注意  内循环j(优化)的范围为[1~i>>1
-| [279. 完全平方数](https://leetcode-cn.com/problems/perfect-squares/)|正整数 n，找最少个完全平方数使得它们的和等于 n | `dp[i] = MIN(dp[i - j * j] + 1)`，i表示当前数字，j*j表示平方数 dp[0]=0 | 注意的dp[0]
-| [322. 零钱兑换](https://leetcode-cn.com/problems/coin-change/)      |一个总金额 amount 换 无限不同面额的硬币 coins，个数最少，无方案返回-1 | `dp[n] = min(dp[n - c1], ... dp[n - cn]) + 1`, dp[0]=0| 注意 最小值初始`float('inf')`
-| [91. 解码方法](https://leetcode-cn.com/problems/decode-ways/)       |给一字符串数字 解码成字母（A-Z),有多少种       | `dp[i] = dp[i-1](能单独成为字母) + dp[i-2](能和前一个组成字母)` | 注意：给的字符串以0开头是没结果的
-| [198. 打家劫舍](https://leetcode-cn.com/problems/house-robber/submissions/)|一数组，选不相邻元素，最大和            | `dp[i] = max(dp[i-2]+nums[i], dp[i-1])`，是否偷第i个，dp[n]为结果|  
-| [213. 打家劫舍II](https://leetcode-cn.com/problems/house-robber-ii/submissions/)|一组数成环，选不相邻元素，最大和    | 和打家劫舍一样                                    | 拿第一个不能拿最后一个，拿最后一个不能拿第一个，把它们分别去掉变成打家劫舍  
-| [337 打家劫舍三](https://leetcode-cn.com/problems/house-robber-iii/) | 树形结构，拿父节点，不能拿其直属的孩子节点    | 树形递归解决dp[0,1],dp[0]表示不选父，dp[1]表示选父|可递归动态规划，也可BFS广度搜索，变成数组回归 大家劫舍
-| [309. 最佳买卖股票时机含冷冻期](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)| 卖出股票就可以买，可买多次，最大收益| 状态机：dp[i][k][0]第i天，总买卖k次不持有股票 dp[i][k][1]第i天，总买买k次持有股票 |利用这个状态机可以解决一些列股票买卖问题
-| [121. 买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/solution/)| [122. 买卖股票的最佳时机II](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/)|[123. 买卖股票的最佳时机III](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/)|[188. 买卖股票的最佳时机 IV](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/)
-| [300. 最长上升子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/) | LIS,数组，求上升子序列，不一定连续 |  `f(n) = max(1, f(i)+1) i<n, 且num[i]<num[n]`  | 初始化所有元素长度为1，以自己结尾, 最优是dp 二分查找一个元素位置，若该元素
-| [376. 摆动系列](https://leetcode-cn.com/problems/wiggle-subsequence/submissions/) | 数组，求最长摆动系列  | 维护两个dp，一个序列处于上升，一个序列处于下降。 `f(n) = max(1, f(i)+1) i<n` | 注意down和up区别
-| LCS 最长公共子序列   |    LCS | LCS(i,j) = 当a[i]=b[j], 1+LCS(i+1,j+1) 当a[i]!=b[j], max(LCS(i,j+1), LCS(i+1,j)) | 明白子串要求连续，而子序列不要求连续
-| Dijkstra单源最短路径 | 一点到另外一点最短路径   | shorttestPath(x)= min(shortestPath(a) + w(a->x)) |
-| [416. 分割等和子集](https://leetcode-cn.com/problems/partition-equal-subset-sum/submissions/)| 一个数组，平均分两个sum相等的集合 | dp[0..sum//2],下标表示背包容量，值表示背包是否装满. `dp[j] = dp[j](原本背包已满) or dp[j-nums[i]] (看背包变小时，是否满)` |  注意：数组下标表示背包容量，遍历数组，考虑是否放入，背包容量为j dp[j],j>=nums[i]
-| [377. 组合总和 IV](https://leetcode-cn.com/problems/combination-sum-iv/) | 给定一个由正整数组成且不存在重复数字的数组，找出和为给定目标正整数的组合的个数。| f(i) = sum(f(i-num[k])), i>=num[k] | 做之前观察例子,第一个nums[k],剩下序列就是f(i-num[k])
-| [474. 一和零](https://leetcode-cn.com/problems/ones-and-zeroes/) | 给多个01串，给M个0和N个1，最多能装多少个01串 | `dp[i][j]`看不同大小的背包，限制i为1的个数，j为0的个数；对每一个字符串，对每个可放的进去的背包：`dp[i][j] = max(dp[i][j], 1+dp[i- count1][j-count1]`| 不要把二维数组看成一个大背包，而是把二维数组每个`dp[i][j]`,看成一个背包
-| [139. 单词拆分](https://leetcode-cn.com/problems/word-break/)| 对于一字符串，能否拆成一个或多个在字典出现的单词 | dp[i], 表示长度为i的字符串 是否装了单词，`dp[i] = dp[i] or dp[i-len(k)]`, k表示单前单词，能否装进去 | 一位数组，每个值看成一个背包， 对于一个单词，遍历能完好装得下它的背包
+| 相关问题                                                                                                 | 题意 | 解题思路 | 编程注意
+|------------------------------------------------------------------------------------------------------| --- |--- | --- |
+| [70. 爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)                                         | n 阶，每次可以爬1或2台阶，多少种方法          | 推导式：f(n) = f(n-1)+f(n-2)                      | n小于0时特殊处理
+| [120. 三角形最小路径和](https://leetcode-cn.com/problems/triangle/)                                          | 给定一个三角形，找出自顶向下的最小路径和      | 非第一和最后时，f(i, j)依赖f(i-1, j-1)和f(i-1, j) | 为第一和最后一个时 f(i,j)依赖项
+| [64. 最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)                                      | MxN网格，从左上角到右下角，最小路径和         | f(i, j) 依赖于f(i, j-1)和f(i-1, j)                | 注意 i,j特殊情况，为0时
+| [343. 整数拆分](https://leetcode-cn.com/problems/integer-break/)                                         |整数N，拆分多个整数，这些整数的最大乘积        | f(N) 依赖于 max(f(i), i) 和 max(f(j), j), i+j=N   | 注意  内循环j(优化)的范围为[1~i>>1
+| [279. 完全平方数](https://leetcode-cn.com/problems/perfect-squares/)                                      |正整数 n，找最少个完全平方数使得它们的和等于 n | `dp[i] = MIN(dp[i - j * j] + 1)`，i表示当前数字，j*j表示平方数 dp[0]=0 | 注意的dp[0]
+| [322. 零钱兑换](https://leetcode-cn.com/problems/coin-change/)                                           |一个总金额 amount 换 无限不同面额的硬币 coins，个数最少，无方案返回-1 | `dp[n] = min(dp[n - c1], ... dp[n - cn]) + 1`, dp[0]=0| 注意 最小值初始`float('inf')`
+| [91. 解码方法](https://leetcode-cn.com/problems/decode-ways/)                                            |给一字符串数字 解码成字母（A-Z),有多少种       | `dp[i] = dp[i-1](能单独成为字母) + dp[i-2](能和前一个组成字母)` | 注意：给的字符串以0开头是没结果的
+| [198. 打家劫舍](https://leetcode-cn.com/problems/house-robber/submissions/)                              |一数组，选不相邻元素，最大和            | `dp[i] = max(dp[i-2]+nums[i], dp[i-1])`，是否偷第i个，dp[n]为结果|  
+| [213. 打家劫舍II](https://leetcode-cn.com/problems/house-robber-ii/submissions/)                         |一组数成环，选不相邻元素，最大和    | 和打家劫舍一样                                    | 拿第一个不能拿最后一个，拿最后一个不能拿第一个，把它们分别去掉变成打家劫舍  
+| [337 打家劫舍三](https://leetcode-cn.com/problems/house-robber-iii/)                                      | 树形结构，拿父节点，不能拿其直属的孩子节点    | 树形递归解决dp[0,1],dp[0]表示不选父，dp[1]表示选父|可递归动态规划，也可BFS广度搜索，变成数组回归 大家劫舍
+| [309. 最佳买卖股票时机含冷冻期](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/) | 卖出股票就可以买，可买多次，最大收益| 状态机：dp[i][k][0]第i天，总买卖k次不持有股票 dp[i][k][1]第i天，总买买k次持有股票 |利用这个状态机可以解决一些列股票买卖问题
+| [121. 买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/solution/)         | [122. 买卖股票的最佳时机II](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/)|[123. 买卖股票的最佳时机III](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/)|[188. 买卖股票的最佳时机 IV](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/)
+| [300. 最长上升子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/)                     | LIS,数组，求上升子序列，不一定连续 |  `f(n) = max(1, f(i)+1) i<n, 且num[i]<num[n]`  | 初始化所有元素长度为1，以自己结尾, 最优是dp 二分查找一个元素位置，若该元素
+| [376. 摆动系列](https://leetcode-cn.com/problems/wiggle-subsequence/submissions/)                        | 数组，求最长摆动系列  | 维护两个dp，一个序列处于上升，一个序列处于下降。 `f(n) = max(1, f(i)+1) i<n` | 注意down和up区别
+| [LCS 最长公共子序列](https://leetcode.cn/problems/qJnOS7/)                                                                                      |    LCS | LCS(i,j) = 当a[i]=b[j], 1+LCS(i+1,j+1) 当a[i]!=b[j], max(LCS(i,j+1), LCS(i+1,j)) | 明白子串要求连续，而子序列不要求连续
+| Dijkstra单源最短路径                                                                                       | 一点到另外一点最短路径   | shorttestPath(x)= min(shortestPath(a) + w(a->x)) |
+| [416. 分割等和子集](https://leetcode-cn.com/problems/partition-equal-subset-sum/submissions/)              | 一个数组，平均分两个sum相等的集合 | dp[0..sum//2],下标表示背包容量，值表示背包是否装满. `dp[j] = dp[j](原本背包已满) or dp[j-nums[i]] (看背包变小时，是否满)` |  注意：数组下标表示背包容量，遍历数组，考虑是否放入，背包容量为j dp[j],j>=nums[i]
+| [377. 组合总和 IV](https://leetcode-cn.com/problems/combination-sum-iv/)                                 | 给定一个由正整数组成且不存在重复数字的数组，找出和为给定目标正整数的组合的个数。| f(i) = sum(f(i-num[k])), i>=num[k] | 做之前观察例子,第一个nums[k],剩下序列就是f(i-num[k])
+| [474. 一和零](https://leetcode-cn.com/problems/ones-and-zeroes/)                                        | 给多个01串，给M个0和N个1，最多能装多少个01串 | `dp[i][j]`看不同大小的背包，限制i为1的个数，j为0的个数；对每一个字符串，对每个可放的进去的背包：`dp[i][j] = max(dp[i][j], 1+dp[i- count1][j-count1]`| 不要把二维数组看成一个大背包，而是把二维数组每个`dp[i][j]`,看成一个背包
+| [139. 单词拆分](https://leetcode-cn.com/problems/word-break/)                                            | 对于一字符串，能否拆成一个或多个在字典出现的单词 | dp[i], 表示长度为i的字符串 是否装了单词，`dp[i] = dp[i] or dp[i-len(k)]`, k表示单前单词，能否装进去 | 一位数组，每个值看成一个背包， 对于一个单词，遍历能完好装得下它的背包
 
 ## 剑指office
 

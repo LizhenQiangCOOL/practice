@@ -2,17 +2,30 @@ package main
 
 import "fmt"
 
-func f(slice []int) []int {
-	if len(slice) > 2 {
-		slice[2] = 100
+var cache = map[interface{}]interface{}{}
+
+func keepalloc() {
+	for i := 0; i < 10000; i++ {
+		m := make([]byte, 1<<10)
+		cache[i] = m
 	}
-	return slice
+}
+func keepalloc2() {
+	for i := 0; i < 100000; i++ {
+		go func() {
+			select {}
+		}()
+	}
 }
 
 func main() {
-	s := make([]int, 3, 5)
-	s[0], s[1], s[2] = 0, 1, 2
-	s1 := f(s)
-	fmt.Printf("s: %+v \n", s)
-	fmt.Printf("s1:%+v \n", s1)
+	//f, _ := os.Create("trace.out")
+	//defer f.Close()
+	//trace.Start(f)
+	//defer trace.Stop()
+	//keepalloc()
+	//keepalloc2()
+	var a []int
+	a = []int{3, 1, 2}
+	fmt.Printf("type: %T", a)
 }
