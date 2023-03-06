@@ -29,81 +29,81 @@
 
 - 利用set、map(dict) 底层要求顺序，用二叉搜索树(平衡)，不要求，使用哈希表（散列表）实现
 
-|相关问题 | 题意 | 解题思路 | 编程注意
-|--- | --- |--- | --- |
-| [350. 两个数组的交集二](https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/) | 给定两个数组，计算它们的交集 | 使用字典(映射)记录出现次数, 如果数组有序，可使用归并思想:双指针 |　注意题意要求输出所有（包括重复）
-|　[454.四数相加二](https://leetcode-cn.com/problems/4sum-ii/) | 四个整数数组，有多有元组(它们的元素)累加为０ |  字典１记录AB数组累加，字典２记录CD数组的累加，再查找　|　注意结果累加是　字典１的值乘字典２的值
-|　[447. 回旋镖的数量](https://leetcode-cn.com/problems/number-of-boomerangs/) | 回旋镖指元组（i, j, k），其中i和j之间距离与i和k之间距离相等，　给多个点，找有多少组　| 字典记录距离，查找字典  |　注意组成元组个数应累加 x*(x-1)　距离相等点数目为ｘ
-| [215.数组中的第K个最大(最小)元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/) | 找数组第k个最大元素　| 除了构建堆和快速排序partition, 还能用字典存储然后排序 |
+| 相关问题                                                                                     | 题意                                               | 解题思路                               | 编程注意                           |
+|------------------------------------------------------------------------------------------|--------------------------------------------------|------------------------------------|--------------------------------|
+| [350. 两个数组的交集二](https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/)         | 给定两个数组，计算它们的交集                                   | 使用字典(映射)记录出现次数, 如果数组有序，可使用归并思想:双指针 | 　注意题意要求输出所有（包括重复）              |
+| 　[454.四数相加二](https://leetcode-cn.com/problems/4sum-ii/)                                  | 四个整数数组，有多有元组(它们的元素)累加为０                          | 字典１记录AB数组累加，字典２记录CD数组的累加，再查找　      | 　注意结果累加是　字典１的值乘字典２的值           |
+| 　[447. 回旋镖的数量](https://leetcode-cn.com/problems/number-of-boomerangs/)                   | 回旋镖指元组（i, j, k），其中i和j之间距离与i和k之间距离相等，　给多个点，找有多少组　 | 字典记录距离，查找字典                        | 　注意组成元组个数应累加 x*(x-1)　距离相等点数目为ｘ |
+| [215.数组中的第K个最大(最小)元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/) | 找数组第k个最大元素　                                      | 除了构建堆和快速排序partition, 还能用字典存储然后排序   |                                |
 
 ### 链表类
 
 -思路：穿针引线，是否需要设虚头指针（头指针会发送改变都要设置），是否要覆盖赋值，是否能双指针（或快慢指针）,断开链表时注意，
 
-|相关问题 | 题意 | 解题思路 | 编程注意
-|--- | --- |--- | --- |
-| [206.反转链表](https://leetcode-cn.com/problems/reverse-linked-list/submissions/) | 将一个单向链表顺序反转，只遍历一遍　| 链表表头前插入节　| 　可以构造虚头指针
-| [92. 反转链表二(注意点比较多)](https://leetcode-cn.com/problems/reverse-linked-list-ii/submissions/)  | 将一个单向链表的某一处(m到n)反转，只遍历一遍　|　复杂的链表某出插入加点：构造虚头指针，要记录已倒叙列表的最后一个元素（即开始反转第一个元素）　| 注意：链表断开与链接，不能造成环死循环
-| [83. 删除排序链表中的重复元素](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/) | 给定有序单项链表，把重复元素删除，只遍历一遍　| 判断当前与下一个是否相同，相同则链表删除下一个，不同则移动当前　| 注意：相同时不用移动当前
-| [86. 分割链表](https://leetcode-cn.com/problems/partition-list/) | 给单向链表和x值，使得链表前部分小于x,后部分大于等于x, 要保持相对顺序(稳定)，只遍历一遍 |　(类似归并merge)可维护两链表，最后合并：构造虚头节点，维护四个指针，遍历一遍　| 处理节点要断开，把节点的next = None
-| [328. 奇偶链表](https://leetcode-cn.com/problems/odd-even-linked-list/)  | 把单向链表，奇数位和偶数位分别排一起，最后相连，只遍历一遍　| (类似归并merge)和上一题一样，维护两个链表(4个指针) | 　注意节点断开，把节点next=None, 循环的节点要后移
-|　[2. 两树相加](https://leetcode-cn.com/problems/add-two-numbers/)  | 两个链表相加，以头为低位，满十进一，得出新链表　| 模拟加法，进位处理（有可能需要自己构造出链表） | 永远怀疑有进位，并处理
-|　[445. 两数相加二](https://leetcode-cn.com/problems/add-two-numbers-ii/) | 两个链表相加，以尾为低位，满十进一，得出新链表 | 主要解决进位如何加在前驱, （反转链表，或者用栈感觉不符合出题人思路）应该用递归(系统栈)　|　这两个问题可转化成１．两链表同样长度　２．循环或递归向加
-|　[203. 移除链表元素](https://leetcode-cn.com/problems/remove-linked-list-elements/)  |　单向链表中删除等于给定值val的所有节点　| 遍历删除，构造虚头指针可减少判断　|　注意循环节点移位
-|　[82. 删除排序链表中的重复元素二](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/) | 排序链表中删除所有重复的节点，只保留每出现过重复的节点　| 留一个标记说明当前重复节点也要删除，　构造虚头指针 | 注意判断的条件
-|　[21. 合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/) | 合并两个有序链表 | （类似归并merge), 构造虚头指针　|
-| [24. 两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs/) | 单向链表实际两两交换相邻节点　|　构造虚头指针，注意节点的断开与链接 |
-| [25. K 个一组翻转链表](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/) | 单向链表　每k个元素内倒序　|  构造虚头指针，要维护pre插入头指针、尾指针(连后面待处理元素)、当前循环指针　，这更复杂的链表倒序　| 注意点：链表断开与连接
-| [147. 对链表进行插入排序](https://leetcode-cn.com/problems/insertion-sort-list/) | 对单向链表进行插入排序　| 又要找前驱，只好递归或者使用栈, 构造虚拟头指针　|
-| [148. 排序链表](https://leetcode-cn.com/problems/sort-list/) | 对链表进行排序，要求时间复杂度O(n logn)和常数级空间复杂度　| 归并排序，　其中找中间点方法：普通遍历两边，计数；更好的方法是快慢指针　|　按照数组中的归并排序即可
-| [237. 删除链表中的节点](https://leetcode-cn.com/problems/delete-node-in-a-linked-list/) | 给定单向链表中某一节点，要求用O(1)时间删除节点　| 无法找到前驱节点，故假装删除，把值往前赋一下，删除该节点的下一个节点　|
-| [19. 删除链表的倒数第N个节点](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/submissions/)  | 单项链表中删除倒数第N个节点　| 使用快慢指针，一个先走N步　| 注意慢指针应该，走到删除节点前驱，为皆
-|　[61. 旋转链表](https://leetcode-cn.com/problems/rotate-list/) | 把单向链表一个元素从后拿到第一叫旋转一次　| 快慢指针，　确定旋转的部分，　特例：K>链表长度，还是要遍历一次知道链表长度，然后取余数　| 慢指针，应该是移除节点的前驱，快指针应该是最后一个元素
-|　[143. 重排链表](https://leetcode-cn.com/problems/reorder-list/)  | 按照顺序重新编排单向链表（合并链表、奇偶链表的变形）| 找中点，后半部分倒序，再奇偶合并 |
+| 相关问题                                                                                               | 题意                                              | 解题思路                                                | 编程注意                           |
+|----------------------------------------------------------------------------------------------------|-------------------------------------------------|-----------------------------------------------------|--------------------------------|
+| [206.反转链表](https://leetcode-cn.com/problems/reverse-linked-list/submissions/)                      | 将一个单向链表顺序反转，只遍历一遍　                              | 链表表头前插入节　                                           | 　可以构造虚头指针                      |
+| [92. 反转链表二(注意点比较多)](https://leetcode-cn.com/problems/reverse-linked-list-ii/submissions/)          | 将一个单向链表的某一处(m到n)反转，只遍历一遍　                       | 　复杂的链表某出插入加点：构造虚头指针，要记录已倒叙列表的最后一个元素（即开始反转第一个元素）　    | 注意：链表断开与链接，不能造成环死循环            |
+| [83. 删除排序链表中的重复元素](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/)           | 给定有序单项链表，把重复元素删除，只遍历一遍　                         | 判断当前与下一个是否相同，相同则链表删除下一个，不同则移动当前　                    | 注意：相同时不用移动当前                   |
+| [86. 分割链表](https://leetcode-cn.com/problems/partition-list/)                                       | 给单向链表和x值，使得链表前部分小于x,后部分大于等于x, 要保持相对顺序(稳定)，只遍历一遍 | 　(类似归并merge)可维护两链表，最后合并：构造虚头节点，维护四个指针，遍历一遍　         | 处理节点要断开，把节点的next = None        |
+| [328. 奇偶链表](https://leetcode-cn.com/problems/odd-even-linked-list/)                                | 把单向链表，奇数位和偶数位分别排一起，最后相连，只遍历一遍　                  | (类似归并merge)和上一题一样，维护两个链表(4个指针)                      | 　注意节点断开，把节点next=None, 循环的节点要后移 |
+| 　[2. 两树相加](https://leetcode-cn.com/problems/add-two-numbers/)                                      | 两个链表相加，以头为低位，满十进一，得出新链表　                        | 模拟加法，进位处理（有可能需要自己构造出链表）                             | 永远怀疑有进位，并处理                    |
+| 　[445. 两数相加二](https://leetcode-cn.com/problems/add-two-numbers-ii/)                                | 两个链表相加，以尾为低位，满十进一，得出新链表                         | 主要解决进位如何加在前驱, （反转链表，或者用栈感觉不符合出题人思路）应该用递归(系统栈)　      | 　这两个问题可转化成１．两链表同样长度　２．循环或递归向加  |
+| 　[203. 移除链表元素](https://leetcode-cn.com/problems/remove-linked-list-elements/)                      | 　单向链表中删除等于给定值val的所有节点　                          | 遍历删除，构造虚头指针可减少判断　                                   | 　注意循环节点移位                      |
+| 　[82. 删除排序链表中的重复元素二](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/)      | 排序链表中删除所有重复的节点，只保留每出现过重复的节点　                    | 留一个标记说明当前重复节点也要删除，　构造虚头指针                           | 注意判断的条件                        |
+| 　[21. 合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)                          | 合并两个有序链表                                        | （类似归并merge), 构造虚头指针　                                |                                |
+| [24. 两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs/)                            | 单向链表实际两两交换相邻节点　                                 | 　构造虚头指针，注意节点的断开与链接                                  |                                |
+| [25. K 个一组翻转链表](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/)                        | 单向链表　每k个元素内倒序　                                  | 构造虚头指针，要维护pre插入头指针、尾指针(连后面待处理元素)、当前循环指针　，这更复杂的链表倒序　 | 注意点：链表断开与连接                    |
+| [147. 对链表进行插入排序](https://leetcode-cn.com/problems/insertion-sort-list/)                            | 对单向链表进行插入排序　                                    | 又要找前驱，只好递归或者使用栈, 构造虚拟头指针　                           |                                |
+| [148. 排序链表](https://leetcode-cn.com/problems/sort-list/)                                           | 对链表进行排序，要求时间复杂度O(n logn)和常数级空间复杂度　              | 归并排序，　其中找中间点方法：普通遍历两边，计数；更好的方法是快慢指针　                | 　按照数组中的归并排序即可                  |
+| [237. 删除链表中的节点](https://leetcode-cn.com/problems/delete-node-in-a-linked-list/)                    | 给定单向链表中某一节点，要求用O(1)时间删除节点　                      | 无法找到前驱节点，故假装删除，把值往前赋一下，删除该节点的下一个节点　                 |                                |
+| [19. 删除链表的倒数第N个节点](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/submissions/) | 单项链表中删除倒数第N个节点　                                 | 使用快慢指针，一个先走N步　                                      | 注意慢指针应该，走到删除节点前驱，为皆            |
+| 　[61. 旋转链表](https://leetcode-cn.com/problems/rotate-list/)                                         | 把单向链表一个元素从后拿到第一叫旋转一次　                           | 快慢指针，　确定旋转的部分，　特例：K>链表长度，还是要遍历一次知道链表长度，然后取余数　       | 慢指针，应该是移除节点的前驱，快指针应该是最后一个元素    |
+| 　[143. 重排链表](https://leetcode-cn.com/problems/reorder-list/)                                       | 按照顺序重新编排单向链表（合并链表、奇偶链表的变形）                      | 找中点，后半部分倒序，再奇偶合并                                    |                                |
 
 ### 栈和队列、优先乘
 
-|相关问题 | 题意 | 解题思路 | 编程注意
-|--- | --- |--- | --- |
-| [20. 有效的括号](https://leetcode-cn.com/problems/valid-parentheses/) |  括号是否匹配 | 利用栈，遇到右括号时就要出一个左口号 | 注意遍历完，栈减
-| [150. 逆波兰表达式求值](https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/)  | 构造逆波兰表达表达式 |利用栈，把计算值重新存在栈中，最后栈元素为结果 | 注意：两个树是否为负数时，如何整除
-| [71. 简化路径](https://leetcode-cn.com/problems/simplify-path/)   | 简化文件路径  |利用栈，等于..如有就弹，等于.就忽略，正常路径则加入 |
-树遍历，前中后序遍历 144 94 145     |   树的遍历 | 递归很简单，非递归：利用栈，前序则要把右边先压栈； 中序，不停先把根节点压入，在压根节点的左元素，后序就是前序的转换 | 注意，中序的非递归
-| [341. 扁平化嵌套列表迭代器](https://leetcode-cn.com/problems/flatten-nested-list-iterator/)  |  列表内嵌列表->一个列表       | 使用队列存储，如果是列表则递归调用存储函数|
-| [102. 二叉树的层次遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)  |    利用队列，注意输出结构
-| [107. 二叉树的层次遍历二](https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/)  |
-| [103. 二叉树的锯齿形层次遍历](https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/)  |
-| [199. 二叉树的右视图](https://leetcode-cn.com/problems/binary-tree-right-side-view/)  |  找每一层的最后一个元素 | 层次遍历
-| [279. 完全平方数](https://leetcode-cn.com/problems/perfect-squares/)          |  用最少的完全平方数构造一个函数 |要构建图，层遍历，BFS广度优先搜索; 可背包
-| [127. 单词接龙](https://leetcode-cn.com/problems/word-ladder/)  | 每次只能换一个字母，能不能从begin单词到end单词，能求最短转换序列   |构建图，然后层遍历
-| [347. 前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)|给一个数组，有数字，根据评率返回前k个 | 利用优先队列(堆)来实现 | 模块heapq 而heapq.heapify无key参数，heapq.nlargest有key参数
-| 23. 合并k个有序序列 | 将k个有序数组，归并成一个有序数组 | 时间复杂度最小，归并时应使用k大小的优先队列(堆)，每次拿出最小的只要log(k)时间复杂度 |  可以使用heapq.merge(*iterables(sort), key, reverse=False)
+| 相关问题                                                                                           | 题意                                   | 解题思路                                                       | 编程注意                                                  |
+|------------------------------------------------------------------------------------------------|--------------------------------------|------------------------------------------------------------|-------------------------------------------------------|
+| [20. 有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)                               | 括号是否匹配                               | 利用栈，遇到右括号时就要出一个左口号                                         | 注意遍历完，栈减                                              |
+| [150. 逆波兰表达式求值](https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/)            | 构造逆波兰表达表达式                           | 利用栈，把计算值重新存在栈中，最后栈元素为结果                                    | 注意：两个树是否为负数时，如何整除                                     |
+| [71. 简化路径](https://leetcode-cn.com/problems/simplify-path/)                                    | 简化文件路径                               | 利用栈，等于..如有就弹，等于.就忽略，正常路径则加入                                |                                                       |
+| 树遍历，前中后序遍历 144 94 145                                                                          | 树的遍历                                 | 递归很简单，非递归：利用栈，前序则要把右边先压栈； 中序，不停先把根节点压入，在压根节点的左元素，后序就是前序的转换 | 注意，中序的非递归                                             |
+| [341. 扁平化嵌套列表迭代器](https://leetcode-cn.com/problems/flatten-nested-list-iterator/)              | 列表内嵌列表->一个列表                         | 使用队列存储，如果是列表则递归调用存储函数                                      |                                                       |
+| [102. 二叉树的层次遍历](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/)           | 利用队列，注意输出结构                          |                                                            |                                                       |
+| [107. 二叉树的层次遍历二](https://leetcode-cn.com/problems/binary-tree-level-order-traversal-ii/)       |                                      |                                                            |                                                       |
+| [103. 二叉树的锯齿形层次遍历](https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/) |                                      |                                                            |                                                       |
+| [199. 二叉树的右视图](https://leetcode-cn.com/problems/binary-tree-right-side-view/)                  | 找每一层的最后一个元素                          | 层次遍历                                                       |                                                       |
+| [279. 完全平方数](https://leetcode-cn.com/problems/perfect-squares/)                                | 用最少的完全平方数构造一个函数                      | 要构建图，层遍历，BFS广度优先搜索; 可背包                                    |                                                       |
+| [127. 单词接龙](https://leetcode-cn.com/problems/word-ladder/)                                     | 每次只能换一个字母，能不能从begin单词到end单词，能求最短转换序列 | 构建图，然后层遍历                                                  |                                                       |
+| [347. 前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)                    | 给一个数组，有数字，根据评率返回前k个                  | 利用优先队列(堆)来实现                                               | 模块heapq 而heapq.heapify无key参数，heapq.nlargest有key参数     |
+| 23. 合并k个有序序列                                                                                   | 将k个有序数组，归并成一个有序数组                    | 时间复杂度最小，归并时应使用k大小的优先队列(堆)，每次拿出最小的只要log(k)时间复杂度             | 可以使用heapq.merge(*iterables(sort), key, reverse=False) |
 
 ### 二叉树和递归
 
 - 是递归(中序遍历)解决，还是 BFS 利用队列 或 DFS 利用栈
 - 如果题目要求是有路径，应考虑递归+回溯，用path记录数组
 
-|相关问题 | 题意 | 解题思路 | 编程注意
-|--- | --- |--- | --- |
-| [111. 二叉树的最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/) |二叉树的最小深度，深度指根到叶子节点 |递归：用前序遍历，到叶子节点就把深度记录；层序遍历：遍历每一层，遇到None，返回该层 | 注意递归终止条件是叶子节点
-| [226. 翻转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/) | 翻转一棵二叉树。即输入一棵树，输出这个树的镜像 |递归：使用前序遍历进行左右子树交换 |
-| [100. 相同的树](https://leetcode-cn.com/problems/same-tree/submissions/) | 递归：前序遍历判断是否相同 |注意终止条件，都为空返回True
-| [101. 对称二叉树](https://leetcode-cn.com/problems/symmetric-tree/submissions/)| 判断一棵树是否对称，即是否镜像 | 递归：前序遍历，左子树与右子树判断  | 注意终止条件
-| [222. 完全二叉树的节点个数](https://leetcode-cn.com/problems/count-complete-tree-nodes/submissions/) | 求一个完全二叉树的节点个数 | 递归：前序遍历，累计个数|
-| [110. 平衡二叉树](https://leetcode-cn.com/problems/balanced-binary-tree/submissions/) | 判断一棵树是否为平衡二叉树 | 要一个辅助函数，判断高度。主函数：判断左右子树高度差，判断左子树是否平衡，判断右子树是否平衡 | 这里不用前序遍历，只要一个辅助函数求高度
-| [112. 路径总和](https://leetcode-cn.com/problems/path-sum/submissions/) | 二叉树，判断是否存在节点和 为 sum的路径 | 递归：前序遍历，sum减去当前的值； 如果要打印路径 用栈来做 | 注意 判断该节点是否为叶子点
-| [404. 左叶子之和](https://leetcode-cn.com/problems/sum-of-left-leaves/submissions/)| 二叉树，左叶子的和         | 递归：前序遍历，是左叶子累加，给出标记说明这个节点是上一节点的左子树还是右子树 |  注意：根节点不是左叶子
-| [257. 二叉树的所有路径](https://leetcode-cn.com/problems/binary-tree-paths/submissions/)| 给定一个二叉树，返回所有从根节点到叶子节点的路径。| 方法一：要求返回路径，使用递归（前序遍历）+回溯，用一个栈保存节点，某次递归函数结束都要回溯(删除节点)（可转化为循环，stack要保存两项一个是节点，一个该节点对应的路径）；方法二：完全递归，每一递归函数返回它的所有路径，是空节点，直接返回当前只有一个元素的列表，不是空节点，遍历左子树，遍历右子树，把结果都整合 |  注意：回溯要用栈保存，遍历树还是用递归； 方法二完全依赖递归
-| [113. 路径总和 II](https://leetcode-cn.com/problems/path-sum-ii/submissions/)| 二叉树，返回所有节点和 为 sum的路径 |方法一：完全递归 ； 方法二：递归（前序遍历）+回溯法 |注意：两种方法的区别
-| [129. 求根到叶子节点数字之和](https://leetcode-cn.com/problems/sum-root-to-leaf-numbers/) | 把路径数字拼接，返回其和 | 变成求出所有路径；方法一：完全递归，方法二：递归+回溯 |
-| [437. 路径总和 III](https://leetcode-cn.com/problems/path-sum-iii/)| 路径和只要在树中从上到下即可  | 方法一：各个节点都当成根节点，问题转化；方法二 回溯存储，反向依次 看和是否相等，相等结果+1 |
-| [235. 二叉搜索树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)| 二分搜索树中，找两个节点的最近公共祖先节点 | 利用二分搜索树的性质，当前节点大于（小于）这两个节点，则公共祖先节点在左边（右边）；当前节点在中间，则就是公共祖先节点| 注意在中间可以是等于
-| [98. 验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/) |验证一个二叉树是否为二分搜索树 | 中序遍历，递归 或者 非递归的中序遍历| 注意：如何写非递归的中序遍历，有点类似深度遍历，但不一样 循环内嵌了循环
-| [94. 二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)| 二叉树的中序遍历 | 写非递归写法，栈，一直压当前元素的左边元素 |
-| [450. 删除二叉搜索树中的节点](https://leetcode-cn.com/problems/delete-node-in-a-bst/)| 二叉搜索树删除指定节点 | 这如果要求时间复杂O(h)就应该 使用递归，
-| [108. 将有序数组转换为二叉搜索树](https://leetcode-cn.com/problems/convert-sorted-array-to-binary-search-tree/submissions/)| 有序数组转换成一颗高度平衡的二叉搜索树 | 递归构建树 |
-| [230. 二叉搜索树中第K小的元素](https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst/)|给定二叉搜索树，找第k个小的元素 | 中序遍历，递归；可以记录一个前一个值； 也可以把这个值当函数返回，要参考剑指offic  | 注意：k为全局的
+| 相关问题                                                                                                           | 题意                        | 解题思路                                                                                                                                                          | 编程注意                                 |
+|----------------------------------------------------------------------------------------------------------------|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------|
+| [111. 二叉树的最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/)                                | 二叉树的最小深度，深度指根到叶子节点        | 递归：用前序遍历，到叶子节点就把深度记录；层序遍历：遍历每一层，遇到None，返回该层                                                                                                                   | 注意递归终止条件是叶子节点                        |
+| [226. 翻转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/)                                             | 翻转一棵二叉树。即输入一棵树，输出这个树的镜像   | 递归：使用前序遍历进行左右子树交换                                                                                                                                             |                                      |
+| [100. 相同的树](https://leetcode-cn.com/problems/same-tree/submissions/)                                           | 递归：前序遍历判断是否相同             | 注意终止条件，都为空返回True                                                                                                                                              |                                      |
+| [101. 对称二叉树](https://leetcode-cn.com/problems/symmetric-tree/submissions/)                                     | 判断一棵树是否对称，即是否镜像           | 递归：前序遍历，左子树与右子树判断                                                                                                                                             | 注意终止条件                               |
+| [222. 完全二叉树的节点个数](https://leetcode-cn.com/problems/count-complete-tree-nodes/submissions/)                     | 求一个完全二叉树的节点个数             | 递归：前序遍历，累计个数                                                                                                                                                  |                                      |
+| [110. 平衡二叉树](https://leetcode-cn.com/problems/balanced-binary-tree/submissions/)                               | 判断一棵树是否为平衡二叉树             | 要一个辅助函数，判断高度。主函数：判断左右子树高度差，判断左子树是否平衡，判断右子树是否平衡                                                                                                                | 这里不用前序遍历，只要一个辅助函数求高度                 |
+| [112. 路径总和](https://leetcode-cn.com/problems/path-sum/submissions/)                                            | 二叉树，判断是否存在节点和 为 sum的路径    | 递归：前序遍历，sum减去当前的值； 如果要打印路径 用栈来做                                                                                                                               | 注意 判断该节点是否为叶子点                       |
+| [404. 左叶子之和](https://leetcode-cn.com/problems/sum-of-left-leaves/submissions/)                                 | 二叉树，左叶子的和                 | 递归：前序遍历，是左叶子累加，给出标记说明这个节点是上一节点的左子树还是右子树                                                                                                                       | 注意：根节点不是左叶子                          |
+| [257. 二叉树的所有路径](https://leetcode-cn.com/problems/binary-tree-paths/submissions/)                               | 给定一个二叉树，返回所有从根节点到叶子节点的路径。 | 方法一：要求返回路径，使用递归（前序遍历）+回溯，用一个栈保存节点，某次递归函数结束都要回溯(删除节点)（可转化为循环，stack要保存两项一个是节点，一个该节点对应的路径）；方法二：完全递归，每一递归函数返回它的所有路径，是空节点，直接返回当前只有一个元素的列表，不是空节点，遍历左子树，遍历右子树，把结果都整合 | 注意：回溯要用栈保存，遍历树还是用递归； 方法二完全依赖递归       |
+| [113. 路径总和 II](https://leetcode-cn.com/problems/path-sum-ii/submissions/)                                      | 二叉树，返回所有节点和 为 sum的路径      | 方法一：完全递归 ； 方法二：递归（前序遍历）+回溯法                                                                                                                                   | 注意：两种方法的区别                           |
+| [129. 求根到叶子节点数字之和](https://leetcode-cn.com/problems/sum-root-to-leaf-numbers/)                                 | 把路径数字拼接，返回其和              | 变成求出所有路径；方法一：完全递归，方法二：递归+回溯                                                                                                                                   |                                      |
+| [437. 路径总和 III](https://leetcode-cn.com/problems/path-sum-iii/)                                                | 路径和只要在树中从上到下即可            | 方法一：各个节点都当成根节点，问题转化；方法二 回溯存储，反向依次 看和是否相等，相等结果+1                                                                                                               |                                      |
+| [235. 二叉搜索树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)          | 二分搜索树中，找两个节点的最近公共祖先节点     | 利用二分搜索树的性质，当前节点大于（小于）这两个节点，则公共祖先节点在左边（右边）；当前节点在中间，则就是公共祖先节点                                                                                                   | 注意在中间可以是等于                           |
+| [98. 验证二叉搜索树](https://leetcode-cn.com/problems/validate-binary-search-tree/)                                   | 验证一个二叉树是否为二分搜索树           | 中序遍历，递归 或者 非递归的中序遍历                                                                                                                                           | 注意：如何写非递归的中序遍历，有点类似深度遍历，但不一样 循环内嵌了循环 |
+| [94. 二叉树的中序遍历](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)                                | 二叉树的中序遍历                  | 写非递归写法，栈，一直压当前元素的左边元素                                                                                                                                         |                                      |
+| [450. 删除二叉搜索树中的节点](https://leetcode-cn.com/problems/delete-node-in-a-bst/)                                     | 二叉搜索树删除指定节点               | 这如果要求时间复杂O(h)就应该 使用递归，                                                                                                                                        |                                      |
+| [108. 将有序数组转换为二叉搜索树](https://leetcode-cn.com/problems/convert-sorted-array-to-binary-search-tree/submissions/) | 有序数组转换成一颗高度平衡的二叉搜索树       | 递归构建树                                                                                                                                                         |                                      |
+| [230. 二叉搜索树中第K小的元素](https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst/)                           | 给定二叉搜索树，找第k个小的元素          | 中序遍历，递归；可以记录一个前一个值； 也可以把这个值当函数返回，要参考剑指offic                                                                                                                   | 注意：k为全局的                             |
 
 - 删除二叉搜索树中节点，并且无父亲节点
 
@@ -166,12 +166,12 @@ class Solution:
 
 ### 递归与回溯
 
-|相关问题 | 题意 | 解题思路 | 编程注意
-|--- | --- |--- | --- |
-| [17. 电话号码的字母组合](https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/submissions/) |　给定数字，返回它能代表字母集合(手机) | 这是一个树形结构，用递归 记录下标，一个当前路径，一个结果集合 | 注意 数字范围和空空字符串
-| [93. 复原IP地址](https://leetcode-cn.com/problems/restore-ip-addresses/submissions/) | 给定一个包含数字的字符串，复原它并返回所有可能的IP地址格式 | 使用递归，一个记录当前，一个结果集合 | 注意 保证判断字符串否为空，‘0’情况，局部字符串大于'255'
-| [131. 分割回文串](https://leetcode-cn.com/problems/palindrome-partitioning/submissions/) | 给定一个字符串，分割成子串，使每个子串都是回文串 | 递归，回溯，用index记录下标，pre记录前面
-| [46. 全排列](https://leetcode-cn.com/problems/permutations/)  | 给没有重复数字的序列，返其所有可能的全排列 | 交换回溯，当前，后面数字 ；递归，回溯 选当前，记录之前 | 注意：交换回溯要 恢复原来状态
+| 相关问题                                                                                                 | 题意                             | 解题思路                            | 编程注意                             |
+|------------------------------------------------------------------------------------------------------|--------------------------------|---------------------------------|----------------------------------|
+| [17. 电话号码的字母组合](https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/submissions/) | 　给定数字，返回它能代表字母集合(手机)           | 这是一个树形结构，用递归 记录下标，一个当前路径，一个结果集合 | 注意 数字范围和空空字符串                    |
+| [93. 复原IP地址](https://leetcode-cn.com/problems/restore-ip-addresses/submissions/)                     | 给定一个包含数字的字符串，复原它并返回所有可能的IP地址格式 | 使用递归，一个记录当前，一个结果集合              | 注意 保证判断字符串否为空，‘0’情况，局部字符串大于'255' |
+| [131. 分割回文串](https://leetcode-cn.com/problems/palindrome-partitioning/submissions/)                  | 给定一个字符串，分割成子串，使每个子串都是回文串       | 递归，回溯，用index记录下标，pre记录前面        |                                  |
+| [46. 全排列](https://leetcode-cn.com/problems/permutations/)                                            | 给没有重复数字的序列，返其所有可能的全排列          | 交换回溯，当前，后面数字 ；递归，回溯 选当前，记录之前    | 回溯法框架，注意：交换回溯要 恢复原来状态            |
 
 ### 动态规划类
 
@@ -182,28 +182,28 @@ class Solution:
 - 多重背包问题： 每个物品不止1个，有num(i)个
 - 多维费用背包，背包物品约束
 
-| 相关问题                                                                                                 | 题意 | 解题思路 | 编程注意
-|------------------------------------------------------------------------------------------------------| --- |--- | --- |
-| [70. 爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)                                         | n 阶，每次可以爬1或2台阶，多少种方法          | 推导式：f(n) = f(n-1)+f(n-2)                      | n小于0时特殊处理
-| [120. 三角形最小路径和](https://leetcode-cn.com/problems/triangle/)                                          | 给定一个三角形，找出自顶向下的最小路径和      | 非第一和最后时，f(i, j)依赖f(i-1, j-1)和f(i-1, j) | 为第一和最后一个时 f(i,j)依赖项
-| [64. 最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)                                      | MxN网格，从左上角到右下角，最小路径和         | f(i, j) 依赖于f(i, j-1)和f(i-1, j)                | 注意 i,j特殊情况，为0时
-| [343. 整数拆分](https://leetcode-cn.com/problems/integer-break/)                                         |整数N，拆分多个整数，这些整数的最大乘积        | f(N) 依赖于 max(f(i), i) 和 max(f(j), j), i+j=N   | 注意  内循环j(优化)的范围为[1~i>>1
-| [279. 完全平方数](https://leetcode-cn.com/problems/perfect-squares/)                                      |正整数 n，找最少个完全平方数使得它们的和等于 n | `dp[i] = MIN(dp[i - j * j] + 1)`，i表示当前数字，j*j表示平方数 dp[0]=0 | 注意的dp[0]
-| [322. 零钱兑换](https://leetcode-cn.com/problems/coin-change/)                                           |一个总金额 amount 换 无限不同面额的硬币 coins，个数最少，无方案返回-1 | `dp[n] = min(dp[n - c1], ... dp[n - cn]) + 1`, dp[0]=0| 注意 最小值初始`float('inf')`
-| [91. 解码方法](https://leetcode-cn.com/problems/decode-ways/)                                            |给一字符串数字 解码成字母（A-Z),有多少种       | `dp[i] = dp[i-1](能单独成为字母) + dp[i-2](能和前一个组成字母)` | 注意：给的字符串以0开头是没结果的
-| [198. 打家劫舍](https://leetcode-cn.com/problems/house-robber/submissions/)                              |一数组，选不相邻元素，最大和            | `dp[i] = max(dp[i-2]+nums[i], dp[i-1])`，是否偷第i个，dp[n]为结果|  
-| [213. 打家劫舍II](https://leetcode-cn.com/problems/house-robber-ii/submissions/)                         |一组数成环，选不相邻元素，最大和    | 和打家劫舍一样                                    | 拿第一个不能拿最后一个，拿最后一个不能拿第一个，把它们分别去掉变成打家劫舍  
-| [337 打家劫舍三](https://leetcode-cn.com/problems/house-robber-iii/)                                      | 树形结构，拿父节点，不能拿其直属的孩子节点    | 树形递归解决dp[0,1],dp[0]表示不选父，dp[1]表示选父|可递归动态规划，也可BFS广度搜索，变成数组回归 大家劫舍
-| [309. 最佳买卖股票时机含冷冻期](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/) | 卖出股票就可以买，可买多次，最大收益| 状态机：dp[i][k][0]第i天，总买卖k次不持有股票 dp[i][k][1]第i天，总买买k次持有股票 |利用这个状态机可以解决一些列股票买卖问题
-| [121. 买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/solution/)         | [122. 买卖股票的最佳时机II](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/)|[123. 买卖股票的最佳时机III](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/)|[188. 买卖股票的最佳时机 IV](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/)
-| [300. 最长上升子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/)                     | LIS,数组，求上升子序列，不一定连续 |  `f(n) = max(1, f(i)+1) i<n, 且num[i]<num[n]`  | 初始化所有元素长度为1，以自己结尾, 最优是dp 二分查找一个元素位置，若该元素
-| [376. 摆动系列](https://leetcode-cn.com/problems/wiggle-subsequence/submissions/)                        | 数组，求最长摆动系列  | 维护两个dp，一个序列处于上升，一个序列处于下降。 `f(n) = max(1, f(i)+1) i<n` | 注意down和up区别
-| [LCS 最长公共子序列](https://leetcode.cn/problems/qJnOS7/)                                                                                      |    LCS | LCS(i,j) = 当a[i]=b[j], 1+LCS(i+1,j+1) 当a[i]!=b[j], max(LCS(i,j+1), LCS(i+1,j)) | 明白子串要求连续，而子序列不要求连续
-| Dijkstra单源最短路径                                                                                       | 一点到另外一点最短路径   | shorttestPath(x)= min(shortestPath(a) + w(a->x)) |
-| [416. 分割等和子集](https://leetcode-cn.com/problems/partition-equal-subset-sum/submissions/)              | 一个数组，平均分两个sum相等的集合 | dp[0..sum//2],下标表示背包容量，值表示背包是否装满. `dp[j] = dp[j](原本背包已满) or dp[j-nums[i]] (看背包变小时，是否满)` |  注意：数组下标表示背包容量，遍历数组，考虑是否放入，背包容量为j dp[j],j>=nums[i]
-| [377. 组合总和 IV](https://leetcode-cn.com/problems/combination-sum-iv/)                                 | 给定一个由正整数组成且不存在重复数字的数组，找出和为给定目标正整数的组合的个数。| f(i) = sum(f(i-num[k])), i>=num[k] | 做之前观察例子,第一个nums[k],剩下序列就是f(i-num[k])
-| [474. 一和零](https://leetcode-cn.com/problems/ones-and-zeroes/)                                        | 给多个01串，给M个0和N个1，最多能装多少个01串 | `dp[i][j]`看不同大小的背包，限制i为1的个数，j为0的个数；对每一个字符串，对每个可放的进去的背包：`dp[i][j] = max(dp[i][j], 1+dp[i- count1][j-count1]`| 不要把二维数组看成一个大背包，而是把二维数组每个`dp[i][j]`,看成一个背包
-| [139. 单词拆分](https://leetcode-cn.com/problems/word-break/)                                            | 对于一字符串，能否拆成一个或多个在字典出现的单词 | dp[i], 表示长度为i的字符串 是否装了单词，`dp[i] = dp[i] or dp[i-len(k)]`, k表示单前单词，能否装进去 | 一位数组，每个值看成一个背包， 对于一个单词，遍历能完好装得下它的背包
+| 相关问题                                                                                                 | 题意                                                                                       | 解题思路                                                                                                        | 编程注意                                                                                      |
+|------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| [70. 爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/)                                         | n 阶，每次可以爬1或2台阶，多少种方法                                                                     | 推导式：f(n) = f(n-1)+f(n-2)                                                                                    | n小于0时特殊处理                                                                                 |
+| [120. 三角形最小路径和](https://leetcode-cn.com/problems/triangle/)                                          | 给定一个三角形，找出自顶向下的最小路径和                                                                     | 非第一和最后时，f(i, j)依赖f(i-1, j-1)和f(i-1, j)                                                                      | 为第一和最后一个时 f(i,j)依赖项                                                                       |
+| [64. 最小路径和](https://leetcode-cn.com/problems/minimum-path-sum/)                                      | MxN网格，从左上角到右下角，最小路径和                                                                     | f(i, j) 依赖于f(i, j-1)和f(i-1, j)                                                                              | 注意 i,j特殊情况，为0时                                                                            |
+| [343. 整数拆分](https://leetcode-cn.com/problems/integer-break/)                                         | 整数N，拆分多个整数，这些整数的最大乘积                                                                     | f(N) 依赖于 max(f(i), i) 和 max(f(j), j), i+j=N                                                                 | 注意  内循环j(优化)的范围为[1~i>>1                                                                   |
+| [279. 完全平方数](https://leetcode-cn.com/problems/perfect-squares/)                                      | 正整数 n，找最少个完全平方数使得它们的和等于 n                                                                | `dp[i] = MIN(dp[i - j * j] + 1)`，i表示当前数字，j*j表示平方数 dp[0]=0                                                   | 注意的dp[0]                                                                                  |
+| [322. 零钱兑换](https://leetcode-cn.com/problems/coin-change/)                                           | 一个总金额 amount 换 无限不同面额的硬币 coins，个数最少，无方案返回-1                                              | `dp[n] = min(dp[n - c1], ... dp[n - cn]) + 1`, dp[0]=0                                                      | 注意 最小值初始`float('inf')`                                                                    |
+| [91. 解码方法](https://leetcode-cn.com/problems/decode-ways/)                                            | 给一字符串数字 解码成字母（A-Z),有多少种                                                                  | `dp[i] = dp[i-1](能单独成为字母) + dp[i-2](能和前一个组成字母)`                                                             | 注意：给的字符串以0开头是没结果的                                                                         |
+| [198. 打家劫舍](https://leetcode-cn.com/problems/house-robber/submissions/)                              | 一数组，选不相邻元素，最大和                                                                           | `dp[i] = max(dp[i-2]+nums[i], dp[i-1])`，是否偷第i个，dp[n]为结果                                                     |                                                                                           |
+| [213. 打家劫舍II](https://leetcode-cn.com/problems/house-robber-ii/submissions/)                         | 一组数成环，选不相邻元素，最大和                                                                         | 和打家劫舍一样                                                                                                     | 拿第一个不能拿最后一个，拿最后一个不能拿第一个，把它们分别去掉变成打家劫舍                                                     |
+| [337 打家劫舍三](https://leetcode-cn.com/problems/house-robber-iii/)                                      | 树形结构，拿父节点，不能拿其直属的孩子节点                                                                    | 树形递归解决dp[0,1],dp[0]表示不选父，dp[1]表示选父                                                                          | 可递归动态规划，也可BFS广度搜索，变成数组回归 大家劫舍                                                             |
+| [309. 最佳买卖股票时机含冷冻期](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/) | 卖出股票就可以买，可买多次，最大收益                                                                       | 状态机：dp[i][k][0]第i天，总买卖k次不持有股票 dp[i][k][1]第i天，总买买k次持有股票                                                      | 利用这个状态机可以解决一些列股票买卖问题                                                                      |
+| [121. 买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/solution/)         | [122. 买卖股票的最佳时机II](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/) | [123. 买卖股票的最佳时机III](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/)                  | [188. 买卖股票的最佳时机 IV](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/) |
+| [300. 最长上升子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/)                     | LIS,数组，求上升子序列，不一定连续                                                                      | `f(n) = max(1, f(i)+1) i<n, 且num[i]<num[n]`                                                                 | 初始化所有元素长度为1，以自己结尾, 最优是dp 二分查找一个元素位置，若该元素                                                  |
+| [376. 摆动系列](https://leetcode-cn.com/problems/wiggle-subsequence/submissions/)                        | 数组，求最长摆动系列                                                                               | 维护两个dp，一个序列处于上升，一个序列处于下降。 `f(n) = max(1, f(i)+1) i<n`                                                       | 注意down和up区别                                                                               |
+| [LCS 最长公共子序列](https://leetcode.cn/problems/qJnOS7/)                                                  | LCS                                                                                      | LCS(i,j) = 当a[i]=b[j], 1+LCS(i+1,j+1) 当a[i]!=b[j], max(LCS(i,j+1), LCS(i+1,j))                              | 明白子串要求连续，而子序列不要求连续                                                                        |
+| Dijkstra单源最短路径                                                                                       | 一点到另外一点最短路径                                                                              | shorttestPath(x)= min(shortestPath(a) + w(a->x))                                                            |                                                                                           |
+| [416. 分割等和子集](https://leetcode-cn.com/problems/partition-equal-subset-sum/submissions/)              | 一个数组，平均分两个sum相等的集合                                                                       | dp[0..sum//2],下标表示背包容量，值表示背包是否装满. `dp[j] = dp[j](原本背包已满) or dp[j-nums[i]] (看背包变小时，是否满)`                     | 注意：数组下标表示背包容量，遍历数组，考虑是否放入，背包容量为j dp[j],j>=nums[i]                                         |
+| [377. 组合总和 IV](https://leetcode-cn.com/problems/combination-sum-iv/)                                 | 给定一个由正整数组成且不存在重复数字的数组，找出和为给定目标正整数的组合的个数。                                                 | f(i) = sum(f(i-num[k])), i>=num[k]                                                                          | 做之前观察例子,第一个nums[k],剩下序列就是f(i-num[k])                                                      |
+| [474. 一和零](https://leetcode-cn.com/problems/ones-and-zeroes/)                                        | 给多个01串，给M个0和N个1，最多能装多少个01串                                                               | `dp[i][j]`看不同大小的背包，限制i为1的个数，j为0的个数；对每一个字符串，对每个可放的进去的背包：`dp[i][j] = max(dp[i][j], 1+dp[i- count1][j-count1]` | 不要把二维数组看成一个大背包，而是把二维数组每个`dp[i][j]`,看成一个背包                                                 |
+| [139. 单词拆分](https://leetcode-cn.com/problems/word-break/)                                            | 对于一字符串，能否拆成一个或多个在字典出现的单词                                                                 | dp[i], 表示长度为i的字符串 是否装了单词，`dp[i] = dp[i] or dp[i-len(k)]`, k表示单前单词，能否装进去                                     | 一位数组，每个值看成一个背包， 对于一个单词，遍历能完好装得下它的背包                                                       |
 
 ## 剑指office
 
