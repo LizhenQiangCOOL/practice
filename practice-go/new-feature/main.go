@@ -1,31 +1,47 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
-var cache = map[interface{}]interface{}{}
+type Request struct {
+	time int
+}
 
-func keepalloc() {
-	for i := 0; i < 10000; i++ {
-		m := make([]byte, 1<<10)
-		cache[i] = m
+var MaxOutstanding = 2
+var sem = make(chan int, MaxOutstanding)
+
+func handler(queue chan *Request) {
+	for r := range queue {
+		process(r)
 	}
 }
-func keepalloc2() {
-	for i := 0; i < 100000; i++ {
-		go func() {
-			select {}
-		}()
+
+func process(req *Request) {
+	fmt.Printf("sleep %d(address: %p)s \r\n", *req, req)
+	time.Sleep(time.Duration(req.time) * time.Second)
+}
+
+func ServerYes(clientRequests chan *Request, quit chan bool) {
+	for i := 0; i < MaxOutstanding; i++ {
+		go handler(clientRequests)
 	}
+	<-quit
 }
 
 func main() {
-	//f, _ := os.Create("trace.out")
-	//defer f.Close()
-	//trace.Start(f)
-	//defer trace.Stop()
-	//keepalloc()
-	//keepalloc2()
-	var a []int
-	a = []int{3, 1, 2}
-	fmt.Printf("type: %T", a)
+	handles := make(chan *Request, 5)
+	quit := make(chan bool)
+	// 任务写入，当没有任务时关闭 handles
+	for i := 1; i <= 5; i++ {
+		handles <- &Request{5}
+	}
+	close(handles)
+	go ServerYes(handles, quit)
+	select {
+	// 获取到某个停止信号
+	case <-time.After(10 * time.Second):
+		quit <- true
+	}
 }

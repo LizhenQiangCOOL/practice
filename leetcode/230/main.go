@@ -1,15 +1,11 @@
 package main
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
+import "leetcode/util"
 
-func kthSmallest(root *TreeNode, k int) int {
+func kthSmallest(root *util.TreeNode, k int) int {
 	res, rank := 0, 0
-	var traverse func(root *TreeNode, k int)
-	traverse = func(root *TreeNode, k int) {
+	var traverse func(root *util.TreeNode, k int)
+	traverse = func(root *util.TreeNode, k int) {
 		if root == nil {
 			return
 		}

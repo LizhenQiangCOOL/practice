@@ -1,10 +1,13 @@
 package main
 
-import "testing"
+import (
+	"leetcode/util"
+	"testing"
+)
 
 func Test_kthSmallest(t *testing.T) {
 	type args struct {
-		root *TreeNode
+		root *util.TreeNode
 		k    int
 	}
 	tests := []struct {
@@ -16,21 +19,21 @@ func Test_kthSmallest(t *testing.T) {
 		{
 			name: "测试用例一",
 			args: args{
-				root: &TreeNode{3,
-					&TreeNode{1, nil, &TreeNode{2, nil, nil}},
-					&TreeNode{4, nil, nil}},
+				root: &util.TreeNode{3,
+					&util.TreeNode{1, nil, &util.TreeNode{2, nil, nil}},
+					&util.TreeNode{4, nil, nil}},
 			},
 			want: int(1),
 		},
 		{
 			name: "测试用例二	",
 			args: args{
-				root: &TreeNode{5,
-					&TreeNode{3,
-						&TreeNode{2,
-							&TreeNode{1, nil, nil}, nil},
-						&TreeNode{4, nil, nil}},
-					&TreeNode{6, nil, nil}},
+				root: &util.TreeNode{5,
+					&util.TreeNode{3,
+						&util.TreeNode{2,
+							&util.TreeNode{1, nil, nil}, nil},
+						&util.TreeNode{4, nil, nil}},
+					&util.TreeNode{6, nil, nil}},
 			},
 			want: int(3),
 		},
