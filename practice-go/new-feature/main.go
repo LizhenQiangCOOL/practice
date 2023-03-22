@@ -2,6 +2,11 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"os/signal"
+	"strconv"
+	"sync"
+	"sync/atomic"
 	"time"
 )
 
@@ -30,18 +35,47 @@ func ServerYes(clientRequests chan *Request, quit chan bool) {
 	<-quit
 }
 
+func print111() {
+	for i := 0; i < 1000; i++ {
+		fmt.Println("111111" + "_ i is " + strconv.Itoa(i))
+		time.Sleep(time.Duration(1) * time.Second)
+	}
+}
+func printgo() {
+	go print111()
+	for j := 0; j < 3; j++ {
+		fmt.Println("jjjjj")
+		time.Sleep(time.Duration(500) * time.Millisecond)
+	}
+}
+
+var status int64
+
 func main() {
-	handles := make(chan *Request, 5)
-	quit := make(chan bool)
-	// 任务写入，当没有任务时关闭 handles
-	for i := 1; i <= 5; i++ {
-		handles <- &Request{5}
+	c := sync.NewCond(&sync.Mutex{})
+	for i := 0; i < 10; i++ {
+		go listen(c)
 	}
-	close(handles)
-	go ServerYes(handles, quit)
-	select {
-	// 获取到某个停止信号
-	case <-time.After(10 * time.Second):
-		quit <- true
+	time.Sleep(1 * time.Second)
+	go broadcast(c)
+
+	ch := make(chan os.Signal, 1)
+	signal.Notify(ch, os.Interrupt)
+	<-ch
+}
+
+func broadcast(c *sync.Cond) {
+	c.L.Lock()
+	atomic.StoreInt64(&status, 1)
+	c.Broadcast()
+	c.L.Unlock()
+}
+
+func listen(c *sync.Cond) {
+	c.L.Lock()
+	for atomic.LoadInt64(&status) != 1 {
+		c.Wait()
 	}
+	fmt.Println("listen")
+	c.L.Unlock()
 }
