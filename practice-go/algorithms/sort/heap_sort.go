@@ -3,7 +3,6 @@ package sort
 func Parent(i int) int {
 	return (i - 1) / 2
 }
-
 func Left(i int) int {
 	return 2*(i+1) - 1
 }

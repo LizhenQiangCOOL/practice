@@ -1,4 +1,5 @@
 
+import heapq
 def main():
     a = [0 for _ in range(9)]
     an = True

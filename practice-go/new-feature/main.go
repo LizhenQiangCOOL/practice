@@ -1,81 +1,41 @@
 package main
 
 import (
+	"container/heap"
 	"fmt"
-	"os"
-	"os/signal"
-	"strconv"
-	"sync"
-	"sync/atomic"
-	"time"
 )
 
-type Request struct {
-	time int
+// An IntHeap is a min-heap of ints.
+type IntHeap []int
+
+func (h IntHeap) Len() int           { return len(h) }
+func (h IntHeap) Less(i, j int) bool { return h[i] < h[j] }
+func (h IntHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+func (h *IntHeap) Push(x any) {
+	// Push and Pop use pointer receivers because they modify the slice's length,
+	// not just its contents.
+	*h = append(*h, x.(int))
 }
 
-var MaxOutstanding = 2
-var sem = make(chan int, MaxOutstanding)
-
-func handler(queue chan *Request) {
-	for r := range queue {
-		process(r)
-	}
+func (h *IntHeap) Pop() any {
+	old := *h
+	n := len(old)
+	x := old[n-1]
+	*h = old[0 : n-1]
+	return x
 }
 
-func process(req *Request) {
-	fmt.Printf("sleep %d(address: %p)s \r\n", *req, req)
-	time.Sleep(time.Duration(req.time) * time.Second)
-}
-
-func ServerYes(clientRequests chan *Request, quit chan bool) {
-	for i := 0; i < MaxOutstanding; i++ {
-		go handler(clientRequests)
-	}
-	<-quit
-}
-
-func print111() {
-	for i := 0; i < 1000; i++ {
-		fmt.Println("111111" + "_ i is " + strconv.Itoa(i))
-		time.Sleep(time.Duration(1) * time.Second)
-	}
-}
-func printgo() {
-	go print111()
-	for j := 0; j < 3; j++ {
-		fmt.Println("jjjjj")
-		time.Sleep(time.Duration(500) * time.Millisecond)
-	}
-}
-
-var status int64
-
+// This example inserts several ints into an IntHeap, checks the minimum,
+// and removes them in order of priority.
 func main() {
-	c := sync.NewCond(&sync.Mutex{})
-	for i := 0; i < 10; i++ {
-		go listen(c)
+	h := &IntHeap{2, 1, 5}
+	heap.Init(h)
+	heap.Push(h, 3)
+	fmt.Printf("arr: %v \n", h)
+	heap.Push(h, 0)
+	fmt.Printf("arr: %v \n", h)
+	fmt.Printf("minimum: %d\n", (*h)[0])
+	for h.Len() > 0 {
+		fmt.Printf("%d ", heap.Pop(h))
 	}
-	time.Sleep(1 * time.Second)
-	go broadcast(c)
-
-	ch := make(chan os.Signal, 1)
-	signal.Notify(ch, os.Interrupt)
-	<-ch
-}
-
-func broadcast(c *sync.Cond) {
-	c.L.Lock()
-	atomic.StoreInt64(&status, 1)
-	c.Broadcast()
-	c.L.Unlock()
-}
-
-func listen(c *sync.Cond) {
-	c.L.Lock()
-	for atomic.LoadInt64(&status) != 1 {
-		c.Wait()
-	}
-	fmt.Println("listen")
-	c.L.Unlock()
 }
