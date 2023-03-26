@@ -1,7 +1,6 @@
 package main
 
 import (
-	"container/heap"
 	"fmt"
 )
 
@@ -28,14 +27,8 @@ func (h *IntHeap) Pop() any {
 // This example inserts several ints into an IntHeap, checks the minimum,
 // and removes them in order of priority.
 func main() {
-	h := &IntHeap{2, 1, 5}
-	heap.Init(h)
-	heap.Push(h, 3)
-	fmt.Printf("arr: %v \n", h)
-	heap.Push(h, 0)
-	fmt.Printf("arr: %v \n", h)
-	fmt.Printf("minimum: %d\n", (*h)[0])
-	for h.Len() > 0 {
-		fmt.Printf("%d ", heap.Pop(h))
-	}
+	a := "hello中"
+	b := []rune(a)
+	fmt.Printf("%#v\n", b)
+	fmt.Printf("%#v\n", b)
 }
