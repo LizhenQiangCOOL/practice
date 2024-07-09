@@ -1,10 +1,8 @@
 package sort
 
-import (
-	"testing"
-)
+import "testing"
 
-func TestQuickSort(t *testing.T) {
+func TestInsertionSort(t *testing.T) {
 	type args struct {
 		A []int
 	}
@@ -16,14 +14,13 @@ func TestQuickSort(t *testing.T) {
 		{
 			name: "random test",
 			args: args{
-				A: RandomSlice(6),
+				A: RandomSlice(100),
 			},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			p, r := 0, len(tt.args.A)-1
-			QuickSort(tt.args.A, p, r)
+			InsertionSort(tt.args.A)
 			if !CheckIsSorted(tt.args.A) {
 				t.Errorf("sort error, Slice: %v", tt.args.A)
 			}

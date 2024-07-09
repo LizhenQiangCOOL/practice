@@ -1,5 +1,7 @@
 package sort
 
+// Parent 存储完全二叉树 e.g. parent index 0, left 1, right 2
+// parent index 1, left 3, right, 4
 func Parent(i int) int {
 	return (i - 1) / 2
 }

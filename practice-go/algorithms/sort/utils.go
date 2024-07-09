@@ -6,14 +6,15 @@ import (
 )
 
 func RandomSlice(n int) []int {
-	rand.Seed(time.Now().Unix())
-	r := make([]int, n)
-	for i := 0; i < len(r); i++ {
-		r[i] = rand.Intn(len(r))
+	r := rand.New(rand.NewSource(time.Now().Unix()))
+	a := make([]int, n)
+	for i := 0; i < len(a); i++ {
+		a[i] = r.Intn(len(a))
 	}
-	return r
+	return a
 }
 
+// CheckIsSorted 检查是否从小到大排序
 func CheckIsSorted(s []int) bool {
 	for i, _ := range s {
 		if i+1 < len(s) {

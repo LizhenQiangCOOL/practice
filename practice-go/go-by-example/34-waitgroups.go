@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func worker(id int, wg *sync.WaitGroup) {
+func worker1(id int, wg *sync.WaitGroup) {
 
 	defer wg.Done()
 
@@ -23,7 +23,7 @@ func main() {
 
 	for i := 1; i <= 5; i++ {
 		wg.Add(1)
-		go worker(i, &wg)
+		go worker1(i, &wg)
 	}
 
 	wg.Wait()
